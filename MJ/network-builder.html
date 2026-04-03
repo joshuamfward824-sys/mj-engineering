@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Engineering Estimator | MJ Engineering</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --bg-elevated: #30363d;
+            --border-color: #30363d;
+            --border-hover: #8b949e;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #238636;
+            --accent-gold: #e3b341;
+            --accent-red: #f85149;
+            --accent-purple: #a371f7;
+            --font-mono: 'JetBrains Mono', monospace;
+            --font-sans: 'Inter', sans-serif;
+            --sidebar-width: 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .app-header {
+            min-height: 84px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            row-gap: 8px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        .brand-copy {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-title {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .brand-subtitle {
+            color: var(--accent-gold);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 4px;
+        }
+
+        .nav-btn {
+            padding: 6px 12px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-secondary);
+            font-size: 13px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .header-meta {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .header-meta span {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .header-meta span:last-child {
+            color: var(--accent-gold);
+            text-align: right;
+        }
+
+        .btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .btn-success {
+            background: var(--accent-green);
+            color: white;
+            border-color: var(--accent-green);
+        }
+
+        /* Main Layout */
+        .app-container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .project-input {
+            width: 100%;
+            padding: 8px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .project-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .wizard-steps {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .step-item {
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .step-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .step-item.active {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .step-item.completed {
+            color: var(--accent-green);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-elevated);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-item.completed .step-number {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .step-item.active .step-number {
+            background: var(--accent-blue);
+            color: white;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .step-desc {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .content-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .content-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .form-section {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .form-label .required {
+            color: var(--accent-red);
+        }
+
+        .form-input, .form-select {
+            padding: 10px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: var(--font-sans);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .input-group .form-input {
+            flex: 1;
+        }
+
+        .input-suffix {
+            padding: 10px 12px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Cable Configuration */
+        .cable-config {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .cable-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .cable-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .btn-small {
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+
+        .cable-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .cable-total {
+            text-align: right;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--accent-gold);
+        }
+
+        /* Cost Summary Panel */
+        .cost-panel {
+            position: fixed;
+            right: 24px;
+            top: 72px;
+            width: 380px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            max-height: calc(100vh - 96px);
+            overflow-y: auto;
+            display: none;
+        }
+
+        .cost-panel.visible {
+            display: block;
+        }
+
+        .cost-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cost-title {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .cost-body {
+            padding: 16px;
+        }
+
+        .cost-category {
+            margin-bottom: 16px;
+        }
+
+        .cost-category-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .cost-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 13px;
+        }
+
+        .cost-line-item {
+            color: var(--text-secondary);
+        }
+
+        .cost-line-value {
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+        }
+
+        .cost-line.total {
+            font-weight: 600;
+            font-size: 14px;
+            border-top: 2px solid var(--border-color);
+            margin-top: 8px;
+            padding-top: 8px;
+        }
+
+        .cost-line.total .cost-line-value {
+            color: var(--accent-gold);
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 24px;
+        }
+
+        /* Validation */
+        .error-message {
+            color: var(--accent-red);
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+        .form-input.error {
+            border-color: var(--accent-red);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-elevated);
+            border-radius: 4px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .cost-panel {
+                position: static;
+                width: 100%;
+                margin-top: 24px;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 980px) {
+            .app-header {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .header-left,
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .header-nav {
+                overflow-x: auto;
+                padding-bottom: 2px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .header-nav {
+                display: none;
+            }
+
+            .header-actions {
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+            .brand-mark {
+                height: 34px;
+            }
+
+            .header-meta span {
+                font-size: 11px;
+                letter-spacing: 0.08em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-left">
+            <a href="index.html" class="logo" aria-label="MJ Engineering home">
+                <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="brand-mark">
+                <span class="brand-copy">
+                    <span class="brand-title">Network Builder</span>
+                    <span class="brand-subtitle">MJ Engineering</span>
+                </span>
+            </a>
+            <nav class="header-nav">
+                <button class="nav-btn active">Project Setup</button>
+                <button class="nav-btn">Materials</button>
+                <button class="nav-btn">Labor</button>
+                <button class="nav-btn">Review</button>
+            </nav>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-secondary" onclick="loadProject()">📂 Load</button>
+            <button class="btn btn-secondary" onclick="saveProject()">💾 Save</button>
+            <button class="btn btn-primary" onclick="toggleCostPanel()">📊 Estimate</button>
+        </div>
+        <div class="header-meta" aria-label="MJ Engineering positioning">
+            <span>Independent Network Solutions</span>
+            <span>Tier IV Data Center</span>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Sidebar Wizard -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title">Project Configuration</div>
+                <input type="text" class="project-input" placeholder="Project Name" id="projectName" value="Dallas-Fort Worth Fiber Ring">
+                <input type="text" class="project-input" placeholder="Client/Location" id="projectLocation" value="Industrial Park District">
+            </div>
+            
+            <div class="wizard-steps">
+                <div class="step-item active" onclick="goToStep(1)">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Site Survey</div>
+                        <div class="step-desc">Location & constraints</div>
+                    </div>
+                </div>
+                
+                <div class="step-item" onclick="goToStep(2)">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Network Topology</div>
+                        <div class="step-desc">Architecture & paths</div>
+                    </div>
+                </div>
+                
+                <div class="step-item" onclick="goToStep(3)">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Cable Specifications</div>
+                        <div class="step-desc">Fiber count & types</div>
+                    </div>
+                </div>
+                
+                <div class="step-item" onclick="goToStep(4)">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Infrastructure</div>
+                        <div class="step-desc">Conduit & handholes</div>
+                    </div>
+                </div>
+                
+                <div class="step-item" onclick="goToStep(5)">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Labor & Equipment</div>
+                        <div class="step-desc">Crews & machinery</div>
+                    </div>
+                </div>
+                
+                <div class="step-item" onclick="goToStep(6)">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <div class="step-title">Testing & Commissioning</div>
+                        <div class="step-desc">OTDR & certification</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title" id="stepTitle">Step 1: Site Survey & Constraints</h1>
+                <span style="color: var(--text-secondary); font-size: 13px;">Complete all required fields</span>
+            </div>
+
+            <div class="content-body">
+                <!-- Step 1: Site Survey -->
+                <div class="form-section" id="step1">
+                    <div class="section-header">
+                        <h2 class="section-title">📍 Site Characteristics</h2>
+                        <p class="section-subtitle">Define the physical environment and regulatory constraints for accurate labor and material estimation.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Project Type <span class="required">*</span></label>
+                            <select class="form-select" id="projectType" onchange="updateEstimate()">
+                                <option value="">Select type...</option>
+                                <option value="greenfield">Greenfield (New Construction)</option>
+                                <option value="brownfield">Brownfield (Existing Infrastructure)</option>
+                                <option value="aerial">Aerial Conversion</option>
+                                <option value="upgrade">Capacity Upgrade</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Terrain Classification <span class="required">*</span></label>
+                            <select class="form-select" id="terrainType" onchange="updateEstimate()">
+                                <option value="">Select terrain...</option>
+                                <option value="urban">Urban (Paved/Concrete)</option>
+                                <option value="suburban">Suburban (Grass/Soil)</option>
+                                <option value="rural">Rural (Open Land)</option>
+                                <option value="rocky">Rocky/Hardpan</option>
+                                <option value="wetland">Wetland/Protected</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Total Route Distance <span class="required">*</span></label>
+                            <div class="input-group">
+                                <input type="number" class="form-input" id="totalDistance" placeholder="0" onchange="updateEstimate()">
+                                <span class="input-suffix">miles</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Number of Splice Points</label>
+                            <input type="number" class="form-input" id="splicePoints" placeholder="2" value="2" onchange="updateEstimate()">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Road Crossings</label>
+                            <input type="number" class="form-input" id="roadCrossings" placeholder="0" onchange="updateEstimate()">
+                            <span class="form-hint">Requires directional boring or open cut permits</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Railroad/Highway Crossings</label>
+                            <input type="number" class="form-input" id="rrCrossings" placeholder="0" onchange="updateEstimate()">
+                            <span class="form-hint">Special permits required (30-90 days)</span>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">Site Constraints & Notes</label>
+                            <textarea class="form-input" rows="3" placeholder="Describe any known utilities, environmental restrictions, or access issues..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Network Topology -->
+                <div class="form-section" id="step2" style="display: none;">
+                    <div class="section-header">
+                        <h2 class="section-title">🌐 Network Architecture</h2>
+                        <p class="section-subtitle">Define the logical topology and physical termination points.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Network Topology <span class="required">*</span></label>
+                            <select class="form-select" id="topology" onchange="updateEstimate()">
+                                <option value="point">Point-to-Point</option>
+                                <option value="star">Star (Hub & Spoke)</option>
+                                <option value="ring">Self-Healing Ring</option>
+                                <option value="mesh">Full Mesh</option>
+                                <option value="tree">Tree (Distribution)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Number of Nodes <span class="required">*</span></label>
+                            <input type="number" class="form-input" id="nodeCount" value="2" min="2" onchange="updateEstimate()">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Redundancy Requirement</label>
+                            <select class="form-select" id="redundancy" onchange="updateEstimate()">
+                                <option value="none">None (Single Path)</option>
+                                <option value="diverse">Diverse Physical Path</option>
+                                <option value="dual">Dual Cable (Active/Active)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Future Growth Capacity</label>
+                            <select class="form-select" id="growthFactor" onchange="updateEstimate()">
+                                <option value="1.0">Current Needs Only</option>
+                                <option value="1.25">25% Growth</option>
+                                <option value="1.5" selected>50% Growth (Standard)</option>
+                                <option value="2.0">100% Growth</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Cable Specifications -->
+                <div class="form-section" id="step3" style="display: none;">
+                    <div class="section-header">
+                        <h2 class="section-title">🔌 Cable Configuration</h2>
+                        <p class="section-subtitle">Specify fiber types, counts, and sheath requirements. Add multiple cable types if needed.</p>
+                    </div>
+
+                    <div id="cableList">
+                        <div class="cable-config">
+                            <div class="cable-header">
+                                <span class="cable-title">Primary Cable Run</span>
+                                <button class="btn btn-secondary btn-small" onclick="removeCable(this)">Remove</button>
+                            </div>
+                            <div class="cable-grid">
+                                <div class="form-group">
+                                    <label class="form-label">Cable Type</label>
+                                    <select class="form-select cable-type" onchange="updateEstimate()">
+                                        <option value="single">Single-Mode OS2 (Standard)</option>
+                                        <option value="single-armored">Single-Mode Armored</option>
+                                        <option value="single-ribbon">Single-Mode Ribbon (High Count)</option>
+                                        <option value="multimode">Multimode OM4</option>
+                                        <option value="hybrid">Hybrid Power+Fiber</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Fiber Count</label>
+                                    <select class="form-select fiber-count" onchange="updateEstimate()">
+                                        <option value="12">12</option>
+                                        <option value="24">24</option>
+                                        <option value="48">48</option>
+                                        <option value="96">96</option>
+                                        <option value="144" selected>144</option>
+                                        <option value="288">288</option>
+                                        <option value="432">432</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Quantity</label>
+                                    <input type="number" class="form-input cable-qty" value="1" min="1" onchange="updateEstimate()">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Unit Cost</label>
+                                    <input type="number" class="form-input cable-cost" value="8.50" step="0.01" onchange="updateEstimate()">
+                                </div>
+                                <div class="cable-total">$<span class="line-total">0</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-secondary" onclick="addCable()">+ Add Cable Type</button>
+
+                    <div style="margin-top: 24px; padding: 16px; background: var(--bg-tertiary); border-radius: 8px;">
+                        <h4 style="margin-bottom: 12px; font-size: 14px;">Cable Specifications Reference</h4>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 12px; color: var(--text-secondary);">
+                            <div>
+                                <strong style="color: var(--text-primary);">OS2 Single-Mode:</strong><br>
+                                • 0.20 dB/km @ 1550nm<br>
+                                • Max distance: 100km+<br>
+                                • Standard for telecom
+                            </div>
+                            <div>
+                                <strong style="color: var(--text-primary);">Armored:</strong><br>
+                                • Steel or aluminum jacket<br>
+                                • Direct burial rated<br>
+                                • +40% cost premium
+                            </div>
+                            <div>
+                                <strong style="color: var(--text-primary);">Ribbon:</strong><br>
+                                • 432+ fibers<br>
+                                • Mass fusion splicing<br>
+                                • High density FTTH
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Infrastructure -->
+                <div class="form-section" id="step4" style="display: none;">
+                    <div class="section-header">
+                        <h2 class="section-title">🏗️ Underground Infrastructure</h2>
+                        <p class="section-subtitle">Conduit systems, handholes, and vaults required for the installation.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Conduit Type</label>
+                            <select class="form-select" id="conduitType" onchange="updateEstimate()">
+                                <option value="none">None (Direct Burial)</option>
+                                <option value="pvc">PVC Schedule 40</option>
+                                <option value="pvc-80">PVC Schedule 80</option>
+                                <option value="hdpe">HDPE (Continuous)</option>
+                                <option value="encased">Concrete Encased Duct Bank</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Conduit Size</label>
+                            <select class="form-select" id="conduitSize" onchange="updateEstimate()">
+                                <option value="2">2"</option>
+                                <option value="3">3"</option>
+                                <option value="4" selected>4"</option>
+                                <option value="6">6"</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Number of Conduits (Ducts)</label>
+                            <input type="number" class="form-input" id="conduitCount" value="2" min="1" onchange="updateEstimate()">
+                            <span class="form-hint">Include spare ducts for future use</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Handholes (24" x 36")</label>
+                            <input type="number" class="form-input" id="handholes" value="4" onchange="updateEstimate()">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Vaults (72" x 96")</label>
+                            <input type="number" class="form-input" id="vaults" value="1" onchange="updateEstimate()">
+                            <span class="form-hint">For splice closures and terminations</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Pull Boxes</label>
+                            <input type="number" class="form-input" id="pullBoxes" value="0" onchange="updateEstimate()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Labor -->
+                <div class="form-section" id="step5" style="display: none;">
+                    <div class="section-header">
+                        <h2 class="section-title">👷 Labor & Equipment</h2>
+                        <p class="section-subtitle">Crew composition and machinery requirements.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Installation Method</label>
+                            <select class="form-select" id="installMethod" onchange="updateEstimate()">
+                                <option value="trench">Open Trench (Excavator)</option>
+                                <option value="plow">Cable Plow (Rural)</option>
+                                <option value="bore">Directional Bore (HDD)</option>
+                                <option value="mixed">Mixed Methods</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Crew Size</label>
+                            <select class="form-select" id="crewSize" onchange="updateEstimate()">
+                                <option value="3">3-Person (Basic)</option>
+                                <option value="5" selected>5-Person (Standard)</option>
+                                <option value="8">8-Person (Complex)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Labor Rate ($/hr)</label>
+                            <input type="number" class="form-input" id="laborRate" value="85" step="5" onchange="updateEstimate()">
+                            <span class="form-hint">Blended rate for crew</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Productivity Factor</label>
+                            <select class="form-select" id="productivity" onchange="updateEstimate()">
+                                <option value="1.2">Easy (Open Terrain)</option>
+                                <option value="1.0" selected>Standard</option>
+                                <option value="0.8">Difficult (Congested)</option>
+                                <option value="0.6">Very Difficult (Rock)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Equipment Rental Days</label>
+                            <input type="number" class="form-input" id="equipDays" value="5" onchange="updateEstimate()">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Equipment Daily Rate ($)</label>
+                            <input type="number" class="form-input" id="equipRate" value="1200" onchange="updateEstimate()">
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 24px; padding: 16px; background: var(--bg-tertiary); border-radius: 8px; font-size: 13px;">
+                        <strong style="color: var(--accent-gold);">Labor Estimates (per mile):</strong><br>
+                        <span style="color: var(--text-secondary);">
+                            • Open Trench: 40-60 hours/mile<br>
+                            • Directional Bore: 80-120 hours/mile<br>
+                            • Aerial: 20-30 hours/mile<br>
+                            • Splicing: 4 hours per fusion splice
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Step 6: Testing -->
+                <div class="form-section" id="step6" style="display: none;">
+                    <div class="section-header">
+                        <h2 class="section-title">🧪 Testing & Commissioning</h2>
+                        <p class="section-subtitle">Quality assurance and documentation requirements.</p>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">OTDR Testing</label>
+                            <select class="form-select" id="otdrTesting" onchange="updateEstimate()">
+                                <option value="none">None</option>
+                                <option value="spot" selected>Spot Checks (10%)</option>
+                                <option value="full">Full Length (100%)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Power Meter Testing</label>
+                            <select class="form-select" id="powerTesting" onchange="updateEstimate()">
+                                <option value="yes" selected>Yes (Standard)</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Documentation</label>
+                            <select class="form-select" id="documentation" onchange="updateEstimate()">
+                                <option value="basic">Basic (As-Builts)</option>
+                                <option value="full" selected>Full (GIS + Redlines)</option>
+                                <option value="premium">Premium (3D Scan + Drone)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Training Hours</label>
+                            <input type="number" class="form-input" id="trainingHours" value="4" onchange="updateEstimate()">
+                            <span class="form-hint">Client handoff training</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 32px; padding: 20px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px;">
+                        <h3 style="margin-bottom: 16px; color: var(--accent-gold);">Project Summary</h3>
+                        <div id="finalSummary" style="font-size: 14px; line-height: 1.6; color: var(--text-secondary);">
+                            Complete all steps to generate final estimate...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="form-navigation">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="changeStep(-1)" style="display: none;">← Previous</button>
+                    <div></div>
+                    <button class="btn btn-primary" id="nextBtn" onclick="changeStep(1)">Next Step →</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Cost Panel -->
+        <div class="cost-panel" id="costPanel">
+            <div class="cost-header">
+                <span class="cost-title">Cost Estimate</span>
+                <button class="btn btn-secondary btn-small" onclick="exportEstimate()">Export</button>
+            </div>
+            <div class="cost-body">
+                <div class="cost-category">
+                    <div class="cost-category-title">Materials</div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Fiber Cable</span>
+                        <span class="cost-line-value" id="costFiber">$0</span>
+                    </div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Conduit & Accessories</span>
+                        <span class="cost-line-value" id="costConduit">$0</span>
+                    </div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Handholes & Vaults</span>
+                        <span class="cost-line-value" id="costVaults">$0</span>
+                    </div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Termination Hardware</span>
+                        <span class="cost-line-value" id="costHardware">$0</span>
+                    </div>
+                </div>
+
+                <div class="cost-category">
+                    <div class="cost-category-title">Labor</div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Installation</span>
+                        <span class="cost-line-value" id="costLabor">$0</span>
+                    </div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Splicing</span>
+                        <span class="cost-line-value" id="costSplicing">$0</span>
+                    </div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Testing</span>
+                        <span class="cost-line-value" id="costTesting">$0</span>
+                    </div>
+                </div>
+
+                <div class="cost-category">
+                    <div class="cost-category-title">Equipment & Other</div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Equipment Rental</span>
+                        <span class="cost-line-value" id="costEquip">$0</span>
+                    </div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Permits & Fees</span>
+                        <span class="cost-line-value" id="costPermits">$0</span>
+                    </div>
+                    <div class="cost-line">
+                        <span class="cost-line-item">Overhead (15%)</span>
+                        <span class="cost-line-value" id="costOverhead">$0</span>
+                    </div>
+                </div>
+
+                <div class="cost-line total">
+                    <span class="cost-line-item">Total Project Cost</span>
+                    <span class="cost-line-value" id="costTotal">$0</span>
+                </div>
+
+                <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                        <span>Cost per foot:</span>
+                        <span id="costPerFoot">$0</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Estimated duration:</span>
+                        <span id="estDuration">0 days</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+            
+            // Hide all steps
+            for (let i = 1; i <= totalSteps; i++) {
+                document.getElementById(`step${i}`).style.display = 'none';
+            }
+            
+            // Show target step
+            document.getElementById(`step${step}`).style.display = 'block';
+            
+            // Update sidebar
+            document.querySelectorAll('.step-item').forEach((item, index) => {
+                item.classList.remove('active', 'completed');
+                if (index + 1 < step) {
+                    item.classList.add('completed');
+                } else if (index + 1 === step) {
+                    item.classList.add('active');
+                }
+            });
+            
+            // Update header
+            const titles = {
+                1: 'Step 1: Site Survey & Constraints',
+                2: 'Step 2: Network Topology',
+                3: 'Step 3: Cable Specifications',
+                4: 'Step 4: Underground Infrastructure',
+                5: 'Step 5: Labor & Equipment',
+                6: 'Step 6: Testing & Commissioning'
+            };
+            document.getElementById('stepTitle').textContent = titles[step];
+            
+            // Update buttons
+            document.getElementById('prevBtn').style.display = step === 1 ? 'none' : 'inline-flex';
+            document.getElementById('nextBtn').textContent = step === totalSteps ? 'Finish' : 'Next Step →';
+            
+            currentStep = step;
+            updateEstimate();
+        }
+
+        function changeStep(direction) {
+            const newStep = currentStep + direction;
+            if (newStep >= 1 && newStep <= totalSteps) {
+                goToStep(newStep);
+            }
+        }
+
+        function addCable() {
+            const cableList = document.getElementById('cableList');
+            const newCable = document.createElement('div');
+            newCable.className = 'cable-config';
+            newCable.innerHTML = `
+                <div class="cable-header">
+                    <span class="cable-title">Additional Cable</span>
+                    <button class="btn btn-secondary btn-small" onclick="removeCable(this)">Remove</button>
+                </div>
+                <div class="cable-grid">
+                    <div class="form-group">
+                        <label class="form-label">Cable Type</label>
+                        <select class="form-select cable-type" onchange="updateEstimate()">
+                            <option value="single">Single-Mode OS2</option>
+                            <option value="single-armored">Single-Mode Armored</option>
+                            <option value="single-ribbon">Single-Mode Ribbon</option>
+                            <option value="multimode">Multimode OM4</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fiber Count</label>
+                        <select class="form-select fiber-count" onchange="updateEstimate()">
+                            <option value="12">12</option>
+                            <option value="24">24</option>
+                            <option value="48">48</option>
+                            <option value="96">96</option>
+                            <option value="144">144</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" class="form-input cable-qty" value="1" min="1" onchange="updateEstimate()">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Unit Cost</label>
+                        <input type="number" class="form-input cable-cost" value="8.50" step="0.01" onchange="updateEstimate()">
+                    </div>
+                    <div class="cable-total">$<span class="line-total">0</span></div>
+                </div>
+            `;
+            cableList.appendChild(newCable);
+            updateEstimate();
+        }
+
+        function removeCable(btn) {
+            btn.closest('.cable-config').remove();
+            updateEstimate();
+        }
+
+        function updateEstimate() {
+            const distance = parseFloat(document.getElementById('totalDistance').value) || 0;
+            const distanceFt = distance * 5280;
+            
+            // Calculate cable costs
+            let cableCost = 0;
+            document.querySelectorAll('.cable-config').forEach(config => {
+                const type = config.querySelector('.cable-type').value;
+                const count = parseInt(config.querySelector('.fiber-count').value) || 0;
+                const qty = parseInt(config.querySelector('.cable-qty').value) || 0;
+                const unitCost = parseFloat(config.querySelector('.cable-cost').value) || 0;
+                
+                const length = distanceFt * qty;
+                const cost = length * unitCost;
+                cableCost += cost;
+                
+                config.querySelector('.line-total').textContent = cost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            });
+            
+            // Conduit costs
+            const conduitType = document.getElementById('conduitType').value;
+            const conduitSize = document.getElementById('conduitSize').value;
+            const conduitCount = parseInt(document.getElementById('conduitCount').value) || 0;
+            let conduitCost = 0;
+            
+            if (conduitType !== 'none') {
+                const conduitRates = {
+                    'pvc': 2.5,
+                    'pvc-80': 4.0,
+                    'hdpe': 3.5,
+                    'encased': 25.0
+                };
+                conduitCost = distanceFt * conduitCount * (conduitRates[conduitType] || 0);
+            }
+            
+            // Vaults and handholes
+            const handholes = parseInt(document.getElementById('handholes').value) || 0;
+            const vaults = parseInt(document.getElementById('vaults').value) || 0;
+            const vaultCost = (handholes * 850) + (vaults * 3200);
+            
+            // Hardware (terminations, splice closures)
+            const nodeCount = parseInt(document.getElementById('nodeCount').value) || 2;
+            const hardwareCost = nodeCount * 1200 + (distance * 500); // Rough estimate for splice closures
+            
+            // Labor calculations
+            const installMethod = document.getElementById('installMethod').value;
+            const crewSize = parseInt(document.getElementById('crewSize').value) || 5;
+            const laborRate = parseFloat(document.getElementById('laborRate').value) || 85;
+            const productivity = parseFloat(document.getElementById('productivity').value) || 1.0;
+            
+            const hoursPerMile = {
+                'trench': 50,
+                'plow': 30,
+                'bore': 100,
+                'mixed': 70
+            };
+            
+            const laborHours = (distance * (hoursPerMile[installMethod] || 50)) / productivity;
+            const laborCost = laborHours * laborRate;
+            
+            // Splicing labor (4 hours per splice, assume splice every 0.5 miles)
+            const spliceCount = Math.ceil(distance / 0.5);
+            const splicingCost = spliceCount * 4 * 95; // $95/hr for fiber tech
+            
+            // Testing
+            const testingCost = distance * 200; // $200 per mile for OTDR and power meter
+            
+            // Equipment
+            const equipDays = parseInt(document.getElementById('equipDays').value) || 0;
+            const equipRate = parseFloat(document.getElementById('equipRate').value) || 0;
+            const equipCost = equipDays * equipRate;
+            
+            // Permits (rough estimate)
+            const roadCrossings = parseInt(document.getElementById('roadCrossings').value) || 0;
+            const rrCrossings = parseInt(document.getElementById('rrCrossings').value) || 0;
+            const permitCost = (roadCrossings * 2500) + (rrCrossings * 15000) + (distance * 100);
+            
+            // Overhead
+            const subtotal = cableCost + conduitCost + vaultCost + hardwareCost + laborCost + splicingCost + testingCost + equipCost + permitCost;
+            const overhead = subtotal * 0.15;
+            const total = subtotal + overhead;
+            
+            // Update display
+            document.getElementById('costFiber').textContent = '$' + cableCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costConduit').textContent = '$' + conduitCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costVaults').textContent = '$' + vaultCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costHardware').textContent = '$' + hardwareCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costLabor').textContent = '$' + laborCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costSplicing').textContent = '$' + splicingCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costTesting').textContent = '$' + testingCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costEquip').textContent = '$' + equipCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costPermits').textContent = '$' + permitCost.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costOverhead').textContent = '$' + overhead.toLocaleString('en-US', {maximumFractionDigits: 0});
+            document.getElementById('costTotal').textContent = '$' + total.toLocaleString('en-US', {maximumFractionDigits: 0});
+            
+            // Per foot cost
+            if (distance > 0) {
+                const perFoot = total / (distance * 5280);
+                document.getElementById('costPerFoot').textContent = '$' + perFoot.toFixed(2);
+            }
+            
+            // Duration estimate
+            const days = Math.ceil(laborHours / 8);
+            document.getElementById('estDuration').textContent = days + ' days';
+            
+            // Update final summary if on last step
+            if (currentStep === 6) {
+                document.getElementById('finalSummary').innerHTML = `
+                    <strong>Project:</strong> ${document.getElementById('projectName').value || 'Unnamed Project'}<br>
+                    <strong>Route:</strong> ${distance} miles of ${document.getElementById('topology').value || 'point-to-point'} ${document.getElementById('projectType').value || 'fiber'}<br>
+                    <strong>Estimated Cost:</strong> $${total.toLocaleString('en-US', {maximumFractionDigits: 0})}<br>
+                    <strong>Timeline:</strong> ${days} working days<br>
+                    <strong>Cost per Mile:</strong> $${(total/distance).toLocaleString('en-US', {maximumFractionDigits: 0})}
+                `;
+            }
+        }
+
+        function toggleCostPanel() {
+            document.getElementById('costPanel').classList.toggle('visible');
+        }
+
+        function exportEstimate() {
+            const projectName = document.getElementById('projectName').value || 'Network-Estimate';
+            const data = {
+                project: projectName,
+                date: new Date().toISOString(),
+                costs: {
+                    fiber: document.getElementById('costFiber').textContent,
+                    total: document.getElementById('costTotal').textContent
+                }
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${projectName.replace(/\s+/g, '-')}-estimate.json`;
+            a.click();
+        }
+
+        function saveProject() {
+            alert('Project saved to local storage. In production, this would save to MJ Engineering cloud.');
+        }
+
+        function loadProject() {
+            alert('Load project dialog would open here.');
+        }
+
+        // Initialize
+        updateEstimate();
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1020" role="img" aria-labelledby="title desc">
+  <title id="title">MJ Engineering logo</title>
+  <desc id="desc">MJ Engineering logo with a red and white MJ monogram, gold circuit line, gold ENGINEERING text, and navy infrastructure tagline on a transparent background.</desc>
+  <defs>
+    <linearGradient id="redFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3b1d"/>
+      <stop offset="100%" stop-color="#cf1500"/>
+    </linearGradient>
+    <linearGradient id="goldFill" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f1a706"/>
+      <stop offset="50%" stop-color="#ffd35b"/>
+      <stop offset="100%" stop-color="#e4a313"/>
+    </linearGradient>
+    <linearGradient id="goldStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#bb8000"/>
+      <stop offset="50%" stop-color="#ffd469"/>
+      <stop offset="100%" stop-color="#a56c00"/>
+    </linearGradient>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#001c4a" flood-opacity="0.18"/>
+    </filter>
+    <style>
+      .outline { stroke: #0d346d; stroke-width: 18; stroke-linejoin: round; }
+      .inner { stroke: #ff2a0e; stroke-width: 10; stroke-linejoin: round; }
+      .goldline { fill: none; stroke: url(#goldFill); stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; }
+      .goldline-outline { fill: none; stroke: #0d346d; stroke-width: 32; stroke-linecap: round; stroke-linejoin: round; }
+      .smallcaps { font-family: Arial, Helvetica, sans-serif; font-weight: 700; letter-spacing: 12px; }
+    </style>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <g transform="translate(200 110)">
+      <path class="outline" fill="#ffffff" d="M35 0 H282 L381 110 L490 0 H724 L642 80 H589 V157 H501 V120 L380 253 L255 120 V286 L35 286 L118 206 V80 Z"/>
+      <path class="inner" fill="#ffffff" d="M67 24 H269 L381 149 L514 24 H684 L617 88 H560 V190 H528 V152 L379 316 L221 153 V254 H99 V93 Z"/>
+      <path class="outline" fill="url(#redFill)" d="M49 284 H219 V470 H26 L88 412 V0 H160 V394 H144 V394 H108 V420 H176 V334 Z"/>
+      <path class="inner" fill="none" d="M113 302 H192 V438 H75 L113 402 Z"/>
+
+      <path class="outline" fill="url(#redFill)" d="M692 0 H1110 V554 H971 L757 428 V239 H916 V442 L940 458 H1043 V91 H692 Z"/>
+      <path class="inner" fill="none" d="M782 239 H884 V455 L954 497 H1014 V118 H782 Z"/>
+
+      <path class="goldline-outline" d="M30 266 H360 L420 322 L496 248 H742"/>
+      <path class="goldline" d="M30 266 H360 L420 322 L496 248 H742"/>
+      <path class="goldline-outline" d="M30 310 H395 L454 369 L531 292 H692"/>
+      <path class="goldline" d="M30 310 H395 L454 369 L531 292 H692"/>
+      <circle cx="728" cy="248" r="24" fill="#0d346d"/>
+      <circle cx="728" cy="248" r="14" fill="#ffd35b"/>
+      <circle cx="646" cy="292" r="22" fill="#0d346d"/>
+      <circle cx="646" cy="292" r="12" fill="#ffd35b"/>
+    </g>
+
+    <g transform="translate(0 610)">
+      <line x1="95" y1="44" x2="1505" y2="44" stroke="url(#goldStroke)" stroke-width="5" opacity="0.75"/>
+      <text x="800" y="50" text-anchor="middle" fill="#b8891c" font-size="24" class="smallcaps">TEXAS</text>
+      <text x="800" y="188" text-anchor="middle" fill="url(#goldFill)" stroke="#cc8e0f" stroke-width="7" paint-order="stroke fill"
+        font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="170" letter-spacing="3">ENGINEERING</text>
+      <line x1="70" y1="264" x2="142" y2="264" stroke="#b8891c" stroke-width="5"/>
+      <line x1="1458" y1="264" x2="1530" y2="264" stroke="#b8891c" stroke-width="5"/>
+      <text x="800" y="280" text-anchor="middle" fill="#173864"
+        font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="64" letter-spacing="4">DATA • FIBER • 5G INFRASTRUCTURE</text>
+    </g>
+  </g>
+</svg>

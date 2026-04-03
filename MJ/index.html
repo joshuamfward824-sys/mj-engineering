@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MJ Engineering - Industrial infrastructure, data solutions, and engineering services in Dallas, Texas">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>MJ Engineering | Dallas Infrastructure Solutions</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-padding-top: 140px;
+        }
+        
+        /* Accessibility and Enhancement Styles */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #d4af37;
+            color: #000;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+            font-weight: 600;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Smooth reveal animations */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Navbar scroll state */
+        .main-nav.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* Focus indicators */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #d4af37;
+            outline-offset: 2px;
+        }
+        
+        a:focus:not(:focus-visible) {
+            outline: none;
+        }
+        
+        /* Print styles */
+        @media print {
+            .main-nav, .hero-cta, .cta-section, footer {
+                display: none;
+            }
+            
+            body {
+                color: #000;
+                background: #fff;
+            }
+            
+            .service-card, .stat-item {
+                border: 1px solid #ccc;
+                break-inside: avoid;
+            }
+        }
+        
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+        
+        /* Mobile menu enhancements */
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.98);
+            padding: 1rem;
+            border-top: 1px solid #333;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        /* Error states for forms */
+        .error {
+            border-color: #dc2626 !important;
+            background-color: rgba(220, 38, 38, 0.1) !important;
+        }
+        
+        .btn {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="dallas-skyline-bg"></div>
+    
+    <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="logo" aria-label="MJ Engineering home">
+            <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="logo-mark">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="data-solutions.html">Data Solutions</a></li>
+            <li><a href="underground.html">Underground &amp; Rental</a></li>
+            <li><a href="network-builder.html">Network Builder</a></li>
+            <li><a href="ai-assistant.html">AI Assistant</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-brand-strip" aria-label="MJ Engineering positioning">
+            <span class="nav-brand-message">Independent Network Solutions</span>
+            <span class="nav-brand-message">Tier IV Data Center</span>
+        </div>
+    </nav>
+
+    <header class="hero" id="main-content">
+        <div class="hero-content">
+            <div class="hero-brand reveal-on-scroll">
+                <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering logo" class="hero-brand-mark">
+            </div>
+            <p class="hero-eyebrow">MJ Engineering</p>
+            <h1>Professional infrastructure engineered clean.</h1>
+            <p class="tagline">More secure. More reliable. More affordable.</p>
+            <p class="hero-intro">
+                Win-win-win is the only kind of solution we engineer.
+            </p>
+            <div class="hero-cta">
+                <a href="#services" class="btn btn-primary">Our Services</a>
+                <a href="contact.html" class="btn btn-secondary">Get a Quote</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="ops-strip" aria-label="Company focus areas">
+        <div class="ops-grid">
+            <div class="ops-item">
+                <span class="ops-label">Primary Focus</span>
+                <span class="ops-value">Data and private infrastructure delivery</span>
+            </div>
+            <div class="ops-item">
+                <span class="ops-label">Field Work</span>
+                <span class="ops-value">Fiber, utility, trenching, and deployment support</span>
+            </div>
+            <div class="ops-item">
+                <span class="ops-label">Best Fit</span>
+                <span class="ops-value">Industrial, telecom, and enterprise environments</span>
+            </div>
+            <div class="ops-item">
+                <span class="ops-label">Coverage</span>
+                <span class="ops-value">Dallas-Fort Worth projects with statewide support</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section">
+        <h2 class="section-title">Core Services</h2>
+        <p class="section-subtitle">Comprehensive infrastructure solutions for modern enterprises</p>
+        
+        <div class="services-grid">
+            <a href="data-solutions.html" class="service-card">
+                <h3>Data Solutions</h3>
+                <p>Private cloud infrastructure, GPU clusters, and secure colocation services in our Dallas Tier III facility.</p>
+                <span class="learn-more">Learn More →</span>
+            </a>
+
+            <a href="underground.html" class="service-card">
+                <h3>Underground &amp; Rental</h3>
+                <p>Professional trenching, directional boring, and equipment rental with certified operators.</p>
+                <span class="learn-more">Learn More →</span>
+            </a>
+
+            <a href="network-builder.html" class="service-card">
+                <h3>Network Builder</h3>
+                <p>Private 5G deployment, fiber optic networks, and telecommunications infrastructure.</p>
+                <span class="learn-more">Learn More →</span>
+            </a>
+
+            <a href="ai-assistant.html" class="service-card">
+                <h3>AI Assistant</h3>
+                <p>Secure API access to large language models with private infrastructure and fixed pricing.</p>
+                <span class="learn-more">Learn More →</span>
+            </a>
+
+            <a href="fortress-dms.html" class="service-card">
+                <h3>Software Engineering</h3>
+                <p>Industry-specific solutions for Oil & Gas, Manufacturing, Telecommunications, Construction, Energy, and Automotive. Custom DMS, SCADA, and enterprise applications.</p>
+                <span class="learn-more">View DMS Demo →</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Enterprise Clients</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15</div>
+                <div class="stat-label">Years in Business</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support Available</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="industries-section">
+        <h2 class="section-title">Industries Served</h2>
+        <div class="industry-tags">
+            <span class="industry-tag">Oil &amp; Gas</span>
+            <span class="industry-tag">Manufacturing</span>
+            <span class="industry-tag">Telecommunications</span>
+            <span class="industry-tag">Construction</span>
+            <span class="industry-tag">Energy &amp; Utilities</span>
+            <span class="industry-tag">Automotive</span>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="industries.html" class="btn btn-outline">View Industry Solutions</a>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="contact-content">
+            <h2>Start Your Project</h2>
+            <p>Contact our team to discuss your infrastructure requirements and get a detailed quote.</p>
+            <a href="contact.html" class="btn btn-primary">Contact Us</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section footer-brand">
+                <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="footer-mark">
+                <p class="footer-note">Dallas, Texas</p>
+                <p class="footer-description">Data, fiber, underground infrastructure, and software-supported delivery for industrial and enterprise projects.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="data-solutions.html">Data Solutions</a></li>
+                    <li><a href="underground.html">Underground &amp; Rental</a></li>
+                    <li><a href="network-builder.html">Network Builder</a></li>
+                    <li><a href="ai-assistant.html">AI Assistant</a></li>
+                    <li><a href="fortress-dms.html">Software Engineering</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><a href="mailto:info@mjengineering.com">info@mjengineering.com</a></p>
+                <p><a href="tel:+12145550199">+1 (214) 555-0199</a></p>
+                <p>24/7 Emergency Support</p>
+                <p>Serving Dallas-Fort Worth and projects across Texas</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span class="current-year">2024</span> MJ Engineering. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>

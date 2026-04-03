@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant | MJ Engineering</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Roboto+Mono:wght@400;500;700&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --industrial-black: #0a0a0a;
+            --industrial-dark: #141414;
+            --industrial-gray: #1f1f1f;
+            --steel-gray: #2d2d2d;
+            --safety-yellow: #ffc107;
+            --warning-orange: #ff5722;
+            --text-white: #f5f5f5;
+            --text-gray: #9e9e9e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--industrial-black);
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 70px);
+        }
+
+        .skyline-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30vh;
+            z-index: -2;
+            opacity: 0.15;
+            background-image: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center bottom;
+            mask-image: linear-gradient(to top, black 0%, transparent 100%);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 3px solid var(--safety-yellow);
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+
+        .logo-mark {
+            width: 50px;
+            height: 50px;
+            background: var(--industrial-dark);
+            border: 2px solid var(--safety-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--safety-yellow);
+            transform: skew(-10deg);
+            position: relative;
+        }
+
+        .logo-mark::after {
+            content: '23';
+            position: absolute;
+            bottom: -8px;
+            right: -8px;
+            background: var(--warning-orange);
+            color: white;
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            font-family: 'Roboto Mono', monospace;
+            transform: skew(10deg);
+        }
+
+        .logo-text {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--safety-yellow);
+            letter-spacing: 4px;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 2rem 1.5rem;
+            border-left: 1px solid #333;
+            position: relative;
+            font-family: 'Chakra Petch', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: var(--safety-yellow);
+            transition: height 0.3s;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active::before {
+            height: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--industrial-black);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: 2px solid var(--safety-yellow);
+            color: var(--safety-yellow);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            margin-top: 80px;
+            height: calc(100vh - 80px);
+        }
+
+        .chat-sidebar {
+            width: 300px;
+            background: var(--industrial-dark);
+            border-right: 2px solid #333;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .new-chat-btn {
+            background: var(--safety-yellow);
+            color: var(--industrial-black);
+            border: none;
+            padding: 1rem;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+            transition: all 0.3s;
+        }
+
+        .new-chat-btn:hover {
+            background: var(--warning-orange);
+        }
+
+        .chat-history {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: var(--industrial-gray);
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .history-item:hover,
+        .history-item.active {
+            border-left-color: var(--safety-yellow);
+            color: var(--text-white);
+            background: var(--industrial-black);
+        }
+
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--industrial-black);
+        }
+
+        .chat-header {
+            padding: 2rem;
+            border-bottom: 2px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header h1 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-gray);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--safety-yellow);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 1.5rem;
+            border: 2px solid #333;
+            position: relative;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: var(--industrial-dark);
+            border-color: var(--steel-gray);
+        }
+
+        .message.assistant {
+            align-self: flex-start;
+            background: var(--industrial-gray);
+            border-color: var(--safety-yellow);
+        }
+
+        .message-header {
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .message.user .message-header {
+            color: var(--text-gray);
+        }
+
+        .message.assistant .message-header {
+            color: var(--safety-yellow);
+        }
+
+        .message-content {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .chat-input-area {
+            padding: 2rem;
+            border-top: 2px solid #333;
+            background: var(--industrial-dark);
+        }
+
+        .input-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: var(--industrial-black);
+            border: 2px solid #333;
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--safety-yellow);
+        }
+
+        .send-btn {
+            padding: 1rem 2rem;
+            background: var(--safety-yellow);
+            color: var(--industrial-black);
+            border: none;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            background: var(--warning-orange);
+        }
+
+        .quick-prompts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quick-prompt {
+            background: var(--industrial-black);
+            border: 1px solid #333;
+            padding: 0.5rem 1rem;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        .quick-prompt:hover {
+            border-color: var(--safety-yellow);
+            color: var(--safety-yellow);
+        }
+
+        footer {
+            background: var(--industrial-black);
+            border-top: 2px solid #333;
+            padding: 1rem 5%;
+            text-align: center;
+        }
+
+        footer p {
+            color: var(--text-gray);
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .chat-sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="skyline-container"></div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <div class="logo-mark">MJ</div>
+                <div class="logo-text">
+                    MJ Engineering
+                    <span>Industrial Infrastructure</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="data-solutions.html">Data Solutions</a></li>
+                <li><a href="underground.html">Underground & Equipment</a></li>
+                <li><a href="industries.html">Industries</a></li>
+                <li><a href="ai-assistant.html" class="active">AI Assistant</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">MENU</button>
+        </div>
+    </nav>
+
+    <div class="chat-container">
+        <aside class="chat-sidebar">
+            <button class="new-chat-btn" onclick="resetChat()">+ New Chat</button>
+            <div class="chat-history">
+                <div class="history-item active">FDC-U Specifications</div>
+                <div class="history-item">Dark Fiber Pricing</div>
+                <div class="history-item">Grid Audit Questions</div>
+                <div class="history-item">DMS Implementation</div>
+            </div>
+        </aside>
+
+        <main class="chat-main">
+            <div class="chat-header">
+                <h1>⚡ Engineering AI</h1>
+                <div class="status">
+                    <div class="status-dot"></div>
+                    <span>System Online</span>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message assistant">
+                    <div class="message-header">MJ Engineering AI</div>
+                    <div class="message-content">
+                        Welcome to MJ Engineering's Infrastructure Assistant. I can help you with:<br><br>
+                        • Private 5G network design and coverage calculations<br>
+                        • Dark fiber route planning and cost estimates<br>
+                        • FDC-U mobile unit specifications and availability<br>
+                        • Grid audit preparation and compliance questions<br><br>
+                        What infrastructure challenge can I help you solve?
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="input-container">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Ask about 5G coverage, dark fiber, FDC-U units..." onkeypress="handleKeyPress(event)">
+                    <button class="send-btn" onclick="sendMessage()">SEND</button>
+                </div>
+                <div class="quick-prompts">
+                    <button class="quick-prompt" onclick="sendPrompt('What is the range of the FDC-U?')">FDC-U Range</button>
+                    <button class="quick-prompt" onclick="sendPrompt('Dark fiber cost per mile?')">Fiber Pricing</button>
+                    <button class="quick-prompt" onclick="sendPrompt('Grid audit timeline?')">Grid Audit</button>
+                    <button class="quick-prompt" onclick="sendPrompt('HIPAA compliance?')">HIPAA</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendPrompt(text) {
+            document.getElementById('chatInput').value = text;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const messages = document.getElementById('chatMessages');
+            
+            // Add user message
+            const userDiv = document.createElement('div');
+            userDiv.className = 'message user';
+            userDiv.innerHTML = `<div class="message-header">You</div><div class="message-content">${text}</div>`;
+            messages.appendChild(userDiv);
+            
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+
+            // Simulate AI response
+            setTimeout(() => {
+                const aiDiv = document.createElement('div');
+                aiDiv.className = 'message assistant';
+                aiDiv.innerHTML = `<div class="message-header">MJ Engineering AI</div><div class="message-content">${generateResponse(text)}</div>`;
+                messages.appendChild(aiDiv);
+                messages.scrollTop = messages.scrollHeight;
+            }, 1000);
+        }
+
+        function generateResponse(input) {
+            const lower = input.toLowerCase();
+            if (lower.includes('fdc-u') || lower.includes('range') || lower.includes('boom')) {
+                return "The FDC-U-85 features an 85ft hydraulic boom lift with a 10km coverage radius. It includes 72-hour battery backup and can be deployed operational within 30 minutes of arrival.";
+            }
+            if (lower.includes('fiber') || lower.includes('cost') || lower.includes('price')) {
+                return "Dark fiber installation typically runs $2,500-$3,800 per month for a 10-mile point-to-point connection. This includes the Grid Audit ($2,500 one-time) and full maintenance.";
+            }
+            if (lower.includes('grid') || lower.includes('audit')) {
+                return "Our Grid Audit includes 21-mile fiber proximity analysis, latency calculations, underground pathway assessment, and custom architecture blueprint. Timeline: 5-7 business days.";
+            }
+            if (lower.includes('hipaa')) {
+                return "Our Double-Sandbox Patient Vault meets HIPAA Technical Safeguards with AES-256 encryption, VM isolation, daily key rotation, and zero cloud dependency. SOC2 Type II certified.";
+            }
+            return "I can provide detailed specifications on our FDC-U units, dark fiber pricing, Grid Audits, or compliance requirements. What specific information do you need?";
+        }
+
+        function resetChat() {
+            document.getElementById('chatMessages').innerHTML = `
+                <div class="message assistant">
+                    <div class="message-header">MJ Engineering AI</div>
+                    <div class="message-content">New conversation started. How can I help with your infrastructure needs?</div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

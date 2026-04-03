@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1200" role="img" aria-labelledby="title desc">
+  <title id="title">MJ Engineering logo</title>
+  <desc id="desc">A black, red, white, and gold logo for MJ Engineering with an interlocked MJ monogram, gold circuit lines, and the words Engineering and Data Fiber SG Infrastructure.</desc>
+  <defs>
+    <linearGradient id="redMain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4338"/>
+      <stop offset="38%" stop-color="#e01111"/>
+      <stop offset="100%" stop-color="#8d0606"/>
+    </linearGradient>
+    <linearGradient id="redFacet" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff7a70" stop-opacity="0.86"/>
+      <stop offset="100%" stop-color="#6d0000" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="goldMain" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9c6f1c"/>
+      <stop offset="20%" stop-color="#d3ab4d"/>
+      <stop offset="48%" stop-color="#f4d98a"/>
+      <stop offset="78%" stop-color="#c69633"/>
+      <stop offset="100%" stop-color="#8d6214"/>
+    </linearGradient>
+    <linearGradient id="goldSoft" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5dfa0" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#b7872d" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="whiteMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#faf7f1"/>
+      <stop offset="100%" stop-color="#c9c4bc"/>
+    </linearGradient>
+    <linearGradient id="graphite" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#414141"/>
+      <stop offset="100%" stop-color="#0c0c0c"/>
+    </linearGradient>
+    <linearGradient id="engineeringFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#dddddd"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000000" flood-opacity="0.38"/>
+    </filter>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#d4af37" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow)">
+    <path d="M260 565 L338 498 L338 250 L448 250 L533 351 L621 250 L742 250 L679 311 L679 565 L568 565 L568 399 L534 438 L492 438 L448 388 L448 565 Z"
+      fill="url(#redMain)" stroke="#ff5b4f" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M302 552 L357 505 L357 281 L428 281 L428 552 Z" fill="#710505" opacity="0.46"/>
+    <path d="M448 250 L533 351 L621 250 L700 250 L647 301 L533 430 L424 302 L377 250 Z" fill="url(#redFacet)"/>
+    <path d="M275 238 H607" stroke="#ff8f86" stroke-width="8" stroke-linecap="round" opacity="0.52"/>
+
+    <path d="M754 250 H1098 L1046 302 V485 Q1046 596 975 653 Q929 690 852 690 H721 L661 631 V522 H832 Q891 522 921 501 Q949 481 949 440 V302 H754 Z"
+      fill="url(#whiteMetal)" stroke="#ffffff" stroke-width="9" stroke-linejoin="round"/>
+    <path d="M950 250 H1098 L1046 302 V485 Q1046 596 975 653 Q929 690 852 690 H785 L743 648 H855 Q920 648 953 619 Q988 589 988 529 V302 Z"
+      fill="url(#graphite)" opacity="0.95"/>
+    <path d="M708 607 L721 620 H846 Q921 620 961 586" fill="none" stroke="#d8d1c7" stroke-width="10" stroke-linecap="round" opacity="0.65"/>
+
+    <path d="M540 515 L602 452 L751 452" fill="none" stroke="#161616" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+    <path d="M240 414 H466 L536 476 L603 398 H770" fill="none" stroke="#17120a" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+    <path d="M240 414 H466 L536 476 L603 398 H770" fill="none" stroke="url(#goldMain)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" filter="url(#softGlow)"/>
+    <path d="M240 438 H440 L513 508 L584 426 H853" fill="none" stroke="#17120a" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+    <path d="M240 438 H440 L513 508 L584 426 H853" fill="none" stroke="url(#goldMain)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="870" cy="426" r="14" fill="#0d0d0d" stroke="url(#goldMain)" stroke-width="8"/>
+    <circle cx="935" cy="404" r="16" fill="#0d0d0d" stroke="url(#goldMain)" stroke-width="8"/>
+  </g>
+
+  <g text-anchor="middle">
+    <path d="M212 740 H1188" stroke="url(#goldMain)" stroke-width="4" stroke-linecap="round" opacity="0.9"/>
+    <text x="700" y="765" fill="url(#goldSoft)" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" letter-spacing="8">TEXAS</text>
+
+    <text x="700" y="910"
+      fill="url(#engineeringFill)"
+      stroke="#1a1a1a"
+      stroke-width="8"
+      paint-order="stroke fill"
+      font-family="Arial Black, Arial, Helvetica, sans-serif"
+      font-size="132"
+      font-weight="900"
+      letter-spacing="3">ENGINEERING</text>
+
+    <text x="700" y="976"
+      fill="url(#goldSoft)"
+      font-family="Arial, Helvetica, sans-serif"
+      font-size="38"
+      font-weight="700"
+      letter-spacing="5">DATA • FIBER • SG INFRASTRUCTURE</text>
+  </g>
+</svg>

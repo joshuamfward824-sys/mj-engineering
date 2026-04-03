@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MJ Engineering Industry Solutions - Oil & Gas, Manufacturing, Telecommunications, Construction, Automotive">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Industries | MJ Engineering</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-padding-top: 140px;
+        }
+        
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .industry-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid #333;
+            padding: 2rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .industry-card:hover {
+            border-color: #d4af37;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .industry-card h3 {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .industry-card p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: #ccc;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .feature-list li:before {
+            content: "• ";
+            color: #dc2626;
+            font-weight: bold;
+        }
+        
+        .savings-box {
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid #dc2626;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
+        
+        .savings-label {
+            font-size: 0.9rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .savings-amount {
+            font-size: 1.5rem;
+            color: #d4af37;
+            font-weight: 700;
+        }
+        
+        .dealership-highlight {
+            border: 2px solid #d4af37;
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .btn {
+            display: inline-block;
+            margin-top: 1rem;
+            touch-action: manipulation;
+        }
+        
+        .click-hint {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #666;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .industry-card:hover .click-hint {
+            opacity: 1;
+        }
+        
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: rgba(26, 26, 26, 0.98);
+            border: 1px solid #d4af37;
+            border-radius: 12px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-header {
+            background: rgba(212, 175, 55, 0.1);
+            padding: 2rem;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .modal-header h2 {
+            color: #d4af37;
+            margin: 0;
+            font-size: 1.8rem;
+        }
+        
+        .modal-header p {
+            color: #888;
+            margin: 0.5rem 0 0;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: rgba(220, 38, 38, 0.2);
+            color: #dc2626;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .question-group {
+            margin-bottom: 2rem;
+        }
+        
+        .question-group h3 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .question-group label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem;
+            background: rgba(10, 10, 10, 0.5);
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .question-group label:hover {
+            border-color: #d4af37;
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .question-group input[type="checkbox"],
+        .question-group input[type="radio"] {
+            margin-right: 0.75rem;
+            accent-color: #dc2626;
+        }
+        
+        .question-group input[type="text"],
+        .question-group input[type="number"],
+        .question-group select,
+        .question-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            font-family: inherit;
+            margin-top: 0.5rem;
+        }
+        
+        .question-group input:focus,
+        .question-group select:focus,
+        .question-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+        }
+        
+        .btn-submit-modal {
+            width: 100%;
+            padding: 1rem;
+            background: #dc2626;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-submit-modal:hover {
+            background: #b91c1c;
+        }
+        
+        /* Accessibility enhancements */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #d4af37;
+            color: #000;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+            font-weight: 600;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .main-nav.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #d4af37;
+            outline-offset: 2px;
+        }
+        
+        a:focus:not(:focus-visible) {
+            outline: none;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+        
+        @media print {
+            .main-nav, .cta-section, footer, .modal-overlay {
+                display: none;
+            }
+            .industry-card {
+                border: 1px solid #000;
+                break-inside: avoid;
+            }
+        }
+        
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.98);
+            padding: 1rem;
+            border-top: 1px solid #333;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="dallas-skyline-bg"></div>
+    
+    <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="logo" aria-label="MJ Engineering home">
+            <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="logo-mark">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="industries.html" class="active" aria-current="page">Industries</a></li>
+            <li><a href="data-solutions.html">Data Solutions</a></li>
+            <li><a href="underground.html">Underground & Rental</a></li>
+            <li><a href="network-builder.html">Network Builder</a></li>
+            <li><a href="ai-assistant.html">AI Assistant</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-brand-strip" aria-label="MJ Engineering positioning">
+            <span class="nav-brand-message">Independent Network Solutions</span>
+            <span class="nav-brand-message">Tier IV Data Center</span>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content">
+        <h1>Industry <span class="gold-text">Solutions</span></h1>
+        <p>Specialized infrastructure solutions by sector. Click any industry to build your custom solution.</p>
+    </header>
+
+    <section>
+        <div class="industries-grid">
+            <div class="industry-card" data-industry="oil-gas" role="button" tabindex="0">
+                <span class="click-hint">Click to configure →</span>
+                <h3>Oil & Gas</h3>
+                <p>Pipeline monitoring, equipment telemetry, and safety compliance systems for upstream and downstream operations.</p>
+                <ul class="feature-list">
+                    <li>SCADA system integration</li>
+                    <li>Pipeline leak detection</li>
+                    <li>Equipment monitoring sensors</li>
+                    <li>Safety automation systems</li>
+                </ul>
+                <div class="savings-box">
+                    <div class="savings-label">Average Annual Savings</div>
+                    <div class="savings-amount">$180,000+</div>
+                </div>
+            </div>
+
+            <div class="industry-card" data-industry="manufacturing" role="button" tabindex="0">
+                <span class="click-hint">Click to configure →</span>
+                <h3>Manufacturing</h3>
+                <p>Smart factory implementations, predictive maintenance, and quality control systems.</p>
+                <ul class="feature-list">
+                    <li>Predictive maintenance AI</li>
+                    <li>Quality control automation</li>
+                    <li>Supply chain optimization</li>
+                    <li>Industrial network infrastructure</li>
+                </ul>
+                <div class="savings-box">
+                    <div class="savings-label">Average Annual Savings</div>
+                    <div class="savings-amount">$100,000+</div>
+                </div>
+            </div>
+
+            <div class="industry-card" data-industry="telecommunications" role="button" tabindex="0">
+                <span class="click-hint">Click to configure →</span>
+                <h3>Telecommunications</h3>
+                <p>Cell tower infrastructure, fiber optic networks, and 5G deployment services.</p>
+                <ul class="feature-list">
+                    <li>Cell tower analysis and upgrades</li>
+                    <li>Fiber optic backbone installation</li>
+                    <li>Network redundancy systems</li>
+                    <li>Private 5G networks</li>
+                </ul>
+                <div class="savings-box">
+                    <div class="savings-label">Average Project Savings</div>
+                    <div class="savings-amount">$150,000+</div>
+                </div>
+            </div>
+
+            <div class="industry-card" data-industry="construction" role="button" tabindex="0">
+                <span class="click-hint">Click to configure →</span>
+                <h3>Construction</h3>
+                <p>Heavy civil construction technology, equipment tracking, and project management systems.</p>
+                <ul class="feature-list">
+                    <li>GPS equipment tracking</li>
+                    <li>Surveying automation</li>
+                    <li>Project management software</li>
+                    <li>Underground utility locating</li>
+                </ul>
+                <div class="savings-box">
+                    <div class="savings-label">Average Annual Savings</div>
+                    <div class="savings-amount">$40,000+</div>
+                </div>
+            </div>
+
+            <div class="industry-card" data-industry="energy" role="button" tabindex="0">
+                <span class="click-hint">Click to configure →</span>
+                <h3>Energy & Utilities</h3>
+                <p>Grid management, renewable integration, and smart metering infrastructure.</p>
+                <ul class="feature-list">
+                    <li>Smart grid analytics</li>
+                    <li>Load balancing systems</li>
+                    <li>Renewable source integration</li>
+                    <li>Substation automation</li>
+                </ul>
+                <div class="savings-box">
+                    <div class="savings-label">Average Annual Savings</div>
+                    <div class="savings-amount">$300,000+</div>
+                </div>
+            </div>
+
+            <div class="industry-card dealership-highlight" data-industry="dealership" role="button" tabindex="0">
+                <span class="click-hint">Click to configure →</span>
+                <h3>Automotive Dealerships</h3>
+                <p>Enterprise-grade dealer management systems with integrated AI automation, private infrastructure, and zero per-transaction fees.</p>
+                <ul class="feature-list">
+                    <li>Complete DMS with inventory management</li>
+                    <li>AI-powered sales automation</li>
+                    <li>Service department optimization</li>
+                    <li>Private cloud infrastructure</li>
+                    <li>Unlimited users, no transaction fees</li>
+                </ul>
+                <div class="savings-box">
+                    <div class="savings-label">Average Annual Savings vs Competitors</div>
+                    <div class="savings-amount">$200,000+</div>
+                </div>
+                <a href="fortress-dms.html" class="btn btn-primary">View Live Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Need a Custom Solution?</h2>
+        <p style="color: #888; margin: 1rem 0 2rem;">We develop industry-specific software and infrastructure for unique operational requirements.</p>
+        <a href="contact.html" class="btn btn-primary">Discuss Your Project</a>
+    </section>
+
+    <!-- Industry Solution Modal -->
+    <div class="modal-overlay" id="industryModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Configure Your Solution</h2>
+                <p id="modalSubtitle">Tell us about your requirements</p>
+                <button class="modal-close" aria-label="Close modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section footer-brand">
+                <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="footer-mark">
+                <p class="footer-note">Dallas, Texas</p>
+                <p class="footer-description">Industry-specific support across infrastructure, deployment, software, and operations-heavy environments.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="data-solutions.html">Data Solutions</a></li>
+                    <li><a href="underground.html">Underground</a></li>
+                    <li><a href="network-builder.html">Network Builder</a></li>
+                    <li><a href="ai-assistant.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><a href="mailto:info@mjengineering.com">info@mjengineering.com</a></p>
+                <p><a href="tel:+12145550199">+1 (214) 555-0199</a></p>
+                <p>Tell us your sector, scope, and timeline for a faster first call</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span class="current-year">2024</span> MJ Engineering. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>

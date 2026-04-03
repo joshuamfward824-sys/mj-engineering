@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MJ Engineering Underground Infrastructure - Trenching, Boring, Equipment Rental in Dallas">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Underground Infrastructure & Equipment Rental | MJ Engineering</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-padding-top: 140px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .pricing-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .pricing-card h3 {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-card .subtitle {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .price-main {
+            font-size: 2.5rem;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-main span {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 400;
+        }
+        
+        .price-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .price-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #2a2a2a;
+            color: #ccc;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .price-list li span:last-child {
+            color: #d4af37;
+            font-weight: 600;
+        }
+        
+        .service-desc {
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            color: #aaa;
+        }
+        
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .equipment-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid #333;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .equipment-card:hover {
+            border-color: #d4af37;
+        }
+        
+        .equipment-card h4 {
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+        }
+        
+        .equipment-card .rate {
+            color: #dc2626;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .equipment-card p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Accessibility and enhancements */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #d4af37;
+            color: #000;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+            font-weight: 600;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .main-nav.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #d4af37;
+            outline-offset: 2px;
+        }
+        
+        a:focus:not(:focus-visible) {
+            outline: none;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+        
+        @media print {
+            .main-nav, .cta-section, footer {
+                display: none;
+            }
+            .pricing-card, .equipment-card {
+                border: 1px solid #000;
+                break-inside: avoid;
+            }
+        }
+        
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.98);
+            padding: 1rem;
+            border-top: 1px solid #333;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        .btn {
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="dallas-skyline-bg"></div>
+    
+    <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="logo" aria-label="MJ Engineering home">
+            <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="logo-mark">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="data-solutions.html">Data Solutions</a></li>
+            <li><a href="underground.html" class="active" aria-current="page">Underground & Rental</a></li>
+            <li><a href="network-builder.html">Network Builder</a></li>
+            <li><a href="ai-assistant.html">AI Assistant</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-brand-strip" aria-label="MJ Engineering positioning">
+            <span class="nav-brand-message">Independent Network Solutions</span>
+            <span class="nav-brand-message">Tier IV Data Center</span>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content">
+        <h1>Underground <span class="gold-text">Infrastructure</span></h1>
+        <p>Professional trenching, boring, and utility installation services</p>
+    </header>
+
+    <section>
+        <div class="section-intro">
+            <p>We provide complete underground infrastructure services including trenching, directional boring, and utility installation. Our equipment rental fleet is available for daily, weekly, or monthly rates with delivery available across the Dallas-Fort Worth metroplex.</p>
+        </div>
+
+        <h2 class="section-title">Equipment <span class="gold-text">Rental</span></h2>
+        
+        <div class="equipment-grid">
+            <div class="equipment-card">
+                <h4>Walk-Behind Trencher</h4>
+                <div class="rate">$185/day</div>
+                <p>24" max depth, 4-6" width. Ideal for residential utility lines.</p>
+                <ul class="price-list" style="margin-top: 1rem;">
+                    <li><span>Weekly Rate</span><span>$650</span></li>
+                    <li><span>Monthly Rate</span><span>$1,850</span></li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <h4>Ride-On Trencher</h4>
+                <div class="rate">$350/day</div>
+                <p>48" max depth, 6-12" width. For commercial projects.</p>
+                <ul class="price-list" style="margin-top: 1rem;">
+                    <li><span>Weekly Rate</span><span>$1,200</span></li>
+                    <li><span>Monthly Rate</span><span>$3,500</span></li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <h4>Mini Excavator (3.5 Ton)</h4>
+                <div class="rate">$275/day</div>
+                <p>8' digging depth, tight access capable. Zero-tail-swing available.</p>
+                <ul class="price-list" style="margin-top: 1rem;">
+                    <li><span>Weekly Rate</span><span>$950</span></li>
+                    <li><span>Monthly Rate</span><span>$2,750</span></li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <h4>Directional Drill</h4>
+                <div class="rate">$850/day</div>
+                <p>500' range, 4-12" bore diameter. GPS guidance system.</p>
+                <ul class="price-list" style="margin-top: 1rem;">
+                    <li><span>Weekly Rate</span><span>$3,200</span></li>
+                    <li><span>Monthly Rate</span><span>$9,500</span></li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <h4>Backhoe (Extendahoe)</h4>
+                <div class="rate">$495/day</div>
+                <p>14-19' digging depth. 4WD with loader bucket.</p>
+                <ul class="price-list" style="margin-top: 1rem;">
+                    <li><span>Weekly Rate</span><span>$1,800</span></li>
+                    <li><span>Monthly Rate</span><span>$5,200</span></li>
+                </ul>
+            </div>
+
+            <div class="equipment-card">
+                <h4>Boom Lift (85ft)</h4>
+                <div class="rate">$595/day</div>
+                <p>Articulating boom with jib. Diesel or electric.</p>
+                <ul class="price-list" style="margin-top: 1rem;">
+                    <li><span>Weekly Rate</span><span>$2,100</span></li>
+                    <li><span>Monthly Rate</span><span>$6,000</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">Installation <span class="gold-text">Services</span></h2>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Electrical Trenching</h3>
+                <p class="subtitle">Underground electrical service installation</p>
+                <div class="price-main">$18-28<span>/linear ft</span></div>
+                <p class="service-desc">Includes PVC conduit installation, bedding sand, warning tape, and backfill. Meets NEC depth requirements.</p>
+                <ul class="price-list">
+                    <li><span>Residential (24" depth)</span><span>$18/ft</span></li>
+                    <li><span>Commercial (30" depth)</span><span>$24/ft</span></li>
+                    <li><span>Highway crossing (36")</span><span>$28/ft</span></li>
+                </ul>
+                <p style="color: #888; font-size: 0.9rem; margin-top: 1rem;">* 500 linear foot minimum. Utility locates included.</p>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Plumbing Rough-In</h3>
+                <p class="subtitle">Sewer and water line installation</p>
+                <div class="price-main">$22-35<span>/linear ft</span></div>
+                <p class="service-desc">Complete trenching with proper slope, bedding, and backfill. Inspection-ready installations.</p>
+                <ul class="price-list">
+                    <li><span>4" Sewer Line</span><span>$22/ft</span></li>
+                    <li><span>6" Sewer Line</span><span>$28/ft</span></li>
+                    <li><span>Water Main (2")</span><span>$35/ft</span></li>
+                </ul>
+                <p style="color: #888; font-size: 0.9rem; margin-top: 1rem;">* Includes permit coordination and inspection scheduling.</p>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Directional Boring</h3>
+                <p class="subtitle">Trenchless utility installation</p>
+                <div class="price-main">$45<span>/linear ft</span></div>
+                <p class="service-desc">Horizontal directional drilling for road crossings and sensitive areas. No surface disruption.</p>
+                <ul class="price-list">
+                    <li><span>Standard Soil</span><span>$45/ft</span></li>
+                    <li><span>Rock/Hardpan</span><span>$65/ft</span></li>
+                    <li><span>Highway Crossing</span><span>$85/ft</span></li>
+                </ul>
+                <p style="color: #888; font-size: 0.9rem; margin-top: 1rem;">* 200 linear foot minimum. Includes entry/exit pits.</p>
+            </div>
+
+            <div class="pricing-card">
+                <h3>Fiber Optic Trenching</h3>
+                <p class="subtitle">Communications infrastructure</p>
+                <div class="price-main">$12-16<span>/linear ft</span></div>
+                <p class="service-desc">Direct burial or conduit installation for fiber optic networks. Includes hand digging near existing utilities.</p>
+                <ul class="price-list">
+                    <li><span>Direct Burial</span><span>$12/ft</span></li>
+                    <li><span>1" Conduit</span><span>$14/ft</span></li>
+                    <li><span>2" Conduit</span><span>$16/ft</span></li>
+                </ul>
+                <p style="color: #888; font-size: 0.9rem; margin-top: 1rem;">* 1,000 linear foot minimum. As-built documentation included.</p>
+            </div>
+        </div>
+
+        <div style="background: rgba(220, 38, 38, 0.1); border: 1px solid #dc2626; padding: 2rem; border-radius: 8px; margin-top: 3rem;">
+            <h3 style="color: #dc2626; margin-bottom: 1rem;">Emergency Services</h3>
+            <p style="color: #aaa; margin-bottom: 1rem;">24/7 emergency response for utility strikes, line breaks, and infrastructure failures.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                <div>
+                    <div style="font-size: 1.5rem; color: white; font-weight: 700;">$195<span style="font-size: 1rem; color: #888;">/hour</span></div>
+                    <p style="color: #888; font-size: 0.9rem;">Standard Emergency Rate</p>
+                </div>
+                <div>
+                    <div style="font-size: 1.5rem; color: white; font-weight: 700;">2 Hour<span style="font-size: 1rem; color: #888;"> Response</span></div>
+                    <p style="color: #888; font-size: 0.9rem;">Guaranteed arrival time</p>
+                </div>
+                <div>
+                    <div style="font-size: 1.5rem; color: white; font-weight: 700;">$350<span style="font-size: 1rem; color: #888;">/hour</span></div>
+                    <p style="color: #888; font-size: 0.9rem;">After Hours (6pm-6am)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Need Equipment or Services?</h2>
+        <p style="color: #888; margin: 1rem 0 2rem;">Contact us for availability and scheduling. Delivery available across DFW.</p>
+        <a href="contact.html" class="btn btn-primary">Request a Quote</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section footer-brand">
+                <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="footer-mark">
+                <p class="footer-note">Dallas, Texas</p>
+                <p class="footer-description">Underground utility support, trenching, and rental coordination for field-ready crews and fast-moving projects.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="data-solutions.html">Data Solutions</a></li>
+                    <li><a href="underground.html">Underground & Rental</a></li>
+                    <li><a href="network-builder.html">Network Builder</a></li>
+                    <li><a href="ai-assistant.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><a href="mailto:info@mjengineering.com">info@mjengineering.com</a></p>
+                <p><a href="tel:+12145550199">+1 (214) 555-0199</a></p>
+                <p>Delivery available across DFW</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span class="current-year">2024</span> MJ Engineering. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>

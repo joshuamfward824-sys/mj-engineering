@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MJ Engineering Data Solutions - Private Cloud, GPU Clusters, and Secure Infrastructure in Dallas">
+    <title>Data Solutions & Private Infrastructure | MJ Engineering</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .service-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            border-color: #d4af37;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .service-card h3 {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .service-card .price {
+            font-size: 2rem;
+            color: #dc2626;
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+        
+        .service-card .price span {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 400;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        
+        .features-list li {
+            padding: 0.5rem 0;
+            color: #aaa;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .features-list li:before {
+            content: "✓ ";
+            color: #d4af37;
+        }
+        
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .tier-card {
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid #333;
+            border-radius: 8px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .tier-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        
+        .tier-card.featured {
+            border-color: #d4af37;
+            background: rgba(212, 175, 55, 0.05);
+            transform: scale(1.02);
+        }
+        
+        .tier-card.featured:hover {
+            transform: scale(1.02) translateY(-5px);
+        }
+        
+        .tier-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #dc2626;
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+        
+        .tier-name {
+            font-size: 1.25rem;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .tier-price {
+            font-size: 2.5rem;
+            color: white;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+        
+        .tier-price span {
+            font-size: 1rem;
+            color: #888;
+        }
+        
+        .token-rate {
+            color: #27c93f;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .section-intro {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+            color: #aaa;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 4rem 10%;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        
+        .comparison-table th {
+            background: #1a1a1a;
+            color: #d4af37;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:hover {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .check {
+            color: #27c93f;
+        }
+        
+        .page-header {
+            padding-top: 120px;
+            text-align: center;
+            padding-bottom: 3rem;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .page-header p {
+            color: #888;
+            font-size: 1.2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin: 4rem 0 2rem;
+            color: white;
+        }
+        
+        .gold-text {
+            color: #d4af37;
+        }
+        
+        .hardware-specs {
+            background: rgba(220, 38, 38, 0.05);
+            border: 1px solid rgba(220, 38, 38, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .hardware-specs h4 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .spec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            font-size: 0.85rem;
+        }
+        
+        .spec-item {
+            color: #aaa;
+        }
+        
+        .spec-item strong {
+            color: white;
+        }
+        
+        .hardware-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+        
+        .hardware-table th,
+        .hardware-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        
+        .hardware-table th {
+            background: #1a1a1a;
+            color: #d4af37;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .hardware-table tr:hover {
+            background: rgba(255,255,255,0.03);
+        }
+        
+        .hardware-table td:first-child {
+            color: #d4af37;
+            font-weight: 500;
+        }
+        
+        .qty-badge {
+            background: rgba(220, 38, 38, 0.2);
+            color: #dc2626;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        
+        .infra-highlight {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .infra-highlight h3 {
+            color: #d4af37;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .infra-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .infra-stat {
+            text-align: center;
+        }
+        
+        .infra-stat .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #dc2626;
+            display: block;
+        }
+        
+        .infra-stat .label {
+            color: #888;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dallas-skyline-bg"></div>
+    
+    <nav class="main-nav" id="mainNav">
+        <div class="logo">
+            <span class="logo-mj">MJ</span>
+            <span class="logo-eng">ENGINEERING</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="data-solutions.html" class="active">Data Solutions</a></li>
+            <li><a href="underground.html">Underground & Rental</a></li>
+            <li><a href="network-builder.html">Network Builder</a></li>
+            <li><a href="ai-assistant.html">AI Assistant</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1>Data <span class="gold-text">Solutions</span></h1>
+        <p>Enterprise infrastructure and private cloud services based in Dallas, TX</p>
+    </header>
+
+    <section>
+        <div class="section-intro">
+            <p>MJ Engineering operates Tier III data centers in Dallas providing private cloud infrastructure, GPU compute resources, and secure colocation services. We offer alternatives to public cloud providers with fixed pricing and no egress fees.</p>
+        </div>
+
+        <h2 class="section-title">Private API Access <span class="gold-text">Tiers</span></h2>
+        
+        <div class="tier-grid">
+            <div class="tier-card">
+                <div class="tier-name">Starter</div>
+                <div class="tier-price">$99<span>/month</span></div>
+                <div class="token-rate">+ $0.001 per 1K tokens</div>
+                <p style="color: #888; margin-bottom: 1.5rem;">Unlimited API calls. Pay only for what you use.</p>
+                <ul class="features-list">
+                    <li>Unlimited API calls</li>
+                    <li>All models included (GPT-4, Claude, Code Llama)</li>
+                    <li>5 concurrent requests</li>
+                    <li>8am-6pm CST support</li>
+                    <li>99.5% uptime SLA</li>
+                    <li>VPN access included</li>
+                    <li>128K context window</li>
+                </ul>
+                <a href="contact.html" class="btn btn-secondary" style="width: 100%; display: block; text-align: center; margin-top: 1rem;">Get Started</a>
+            </div>
+
+            <div class="tier-card featured">
+                <div class="tier-badge">Most Popular</div>
+                <div class="tier-name">Professional</div>
+                <div class="tier-price">$499<span>/month</span></div>
+                <div class="token-rate">+ $0.0008 per 1K tokens</div>
+                <p style="color: #888; margin-bottom: 1.5rem;">Reduced token rates for production workloads.</p>
+                <ul class="features-list">
+                    <li>Unlimited API calls</li>
+                    <li>All models + Fine-tuning</li>
+                    <li>25 concurrent requests</li>
+                    <li>24/7 priority support</li>
+                    <li>99.9% uptime SLA</li>
+                    <li>Dedicated compute allocation</li>
+                    <li>Custom model fine-tuning (1 model)</li>
+                    <li>256K context window</li>
+                </ul>
+                <a href="contact.html" class="btn btn-primary" style="width: 100%; display: block; text-align: center; margin-top: 1rem;">Get Started</a>
+            </div>
+
+            <div class="tier-card">
+                <div class="tier-name">Enterprise</div>
+                <div class="tier-price">$1,999<span>/month</span></div>
+                <div class="token-rate">+ $0.0005 per 1K tokens</div>
+                <p style="color: #888; margin-bottom: 1.5rem;">Best rates for high-volume organizations.</p>
+                <ul class="features-list">
+                    <li>Unlimited API calls</li>
+                    <li>Full model suite + Private clusters</li>
+                    <li>Unlimited concurrent requests</li>
+                    <li>24/7 dedicated support line</li>
+                    <li>99.99% uptime SLA</li>
+                    <li>Private cluster option</li>
+                    <li>Unlimited model fine-tuning</li>
+                    <li>On-premise deployment available</li>
+                    <li>1M token context window</li>
+                </ul>
+                <a href="contact.html" class="btn btn-secondary" style="width: 100%; display: block; text-align: center; margin-top: 1rem;">Contact Sales</a>
+            </div>
+        </div>
+
+        <div class="infra-highlight">
+            <h3>MJ Engineering Supercluster</h3>
+            <p style="color: #aaa; max-width: 600px; margin: 0 auto 2rem;">Production-grade AI infrastructure featuring AMD Instinct MI250X accelerators and AMD EPYC Genoa processors. Deployed in our Dallas Tier III facility.</p>
+            
+            <div class="infra-stats">
+                <div class="infra-stat">
+                    <span class="number">80</span>
+                    <span class="label">MI250X GPUs</span>
+                </div>
+                <div class="infra-stat">
+                    <span class="number">10</span>
+                    <span class="label">Compute Nodes</span>
+                </div>
+                <div class="infra-stat">
+                    <span class="number">20TB</span>
+                    <span class="label">System RAM</span>
+                </div>
+                <div class="infra-stat">
+                    <span class="number">1PB</span>
+                    <span class="label">NVMe Storage</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Hardware <span class="gold-text">Specifications</span></h2>
+        
+        <table class="hardware-table">
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Specification</th>
+                    <th>Qty</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Chassis</td>
+                    <td>Inspur NF5488M6 (Barebone w/ UBB & PSUs)</td>
+                    <td><span class="qty-badge">10</span></td>
+                </tr>
+                <tr>
+                    <td>GPU Muscle</td>
+                    <td>AMD Instinct MI250X (128GB HBM2e)</td>
+                    <td><span class="qty-badge">80</span></td>
+                </tr>
+                <tr>
+                    <td>Processors</td>
+                    <td>AMD EPYC 9654 (96-Core Genoa)</td>
+                    <td><span class="qty-badge">20</span></td>
+                </tr>
+                <tr>
+                    <td>System RAM</td>
+                    <td>DDR5-4800 128GB ECC RDIMM (2TB per Node)</td>
+                    <td><span class="qty-badge">160</span></td>
+                </tr>
+                <tr>
+                    <td>Networking</td>
+                    <td>NVIDIA ConnectX-7 400G InfiniBand NICs</td>
+                    <td><span class="qty-badge">10</span></td>
+                </tr>
+                <tr>
+                    <td>IB Switch</td>
+                    <td>NVIDIA Quantum-2 QM9700 (40-Port 400G)</td>
+                    <td><span class="qty-badge">1</span></td>
+                </tr>
+                <tr>
+                    <td>Data Storage</td>
+                    <td>Samsung PM1743 15.36TB Enterprise NVMe</td>
+                    <td><span class="qty-badge">64</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="section-title">Infrastructure <span class="gold-text">Services</span></h2>
+        
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>GPU Cluster Rental</h3>
+                <div class="price">$2,800<span>/month per node</span></div>
+                <p style="color: #888; margin-bottom: 1rem;">MI250X nodes for AI training and inference</p>
+                <ul class="features-list">
+                    <li>8x AMD Instinct MI250X per node</li>
+                    <li>2x AMD EPYC 9654 per node</li>
+                    <li>2TB DDR5 RAM per node</li>
+                    <li>400Gbps InfiniBand networking</li>
+                    <li>Ubuntu 22.04 LTS pre-installed</li>
+                    <li>Root access provided</li>
+                </ul>
+                <div class="hardware-specs">
+                    <h4>Node Specifications</h4>
+                    <div class="spec-grid">
+                        <div class="spec-item"><strong>GPUs:</strong> 8x MI250X</div>
+                        <div class="spec-item"><strong>CPU:</strong> 2x EPYC 9654</div>
+                        <div class="spec-item"><strong>RAM:</strong> 2TB DDR5</div>
+                        <div class="spec-item"><strong>Network:</strong> 400Gbps IB</div>
+                        <div class="spec-item"><strong>Storage:</strong> Local NVMe</div>
+                        <div class="spec-item"><strong>Location:</strong> Dallas, TX</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <h3>Secure Colocation</h3>
+                <div class="price">$1,200<span>/rack per month</span></div>
+                <p style="color: #888; margin-bottom: 1rem;">Tier III data center space in Dallas facility</p>
+                <ul class="features-list">
+                    <li>Full 42U rack</li>
+                    <li>10Gbps unmetered bandwidth</li>
+                    <li>Dual power feeds (A+B)</li>
+                    <li>Biometric access control</li>
+                    <li>24/7 physical security</li>
+                    <li>Remote hands service included</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Private Cloud Compute</h3>
+                <div class="price">$450<span>/month per server</span></div>
+                <p style="color: #888; margin-bottom: 1rem;">Dedicated bare metal servers</p>
+                <ul class="features-list">
+                    <li>Dual AMD EPYC 9654</li>
+                    <li>512GB DDR5 ECC RAM</li>
+                    <li>2x 3.84TB NVMe SSD</li>
+                    <li>10Gbps network port</li>
+                    <li>IPMI/KVM access</li>
+                    <li>No virtualization overhead</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Object Storage</h3>
+                <div class="price">$0.015<span>/GB per month</span></div>
+                <p style="color: #888; margin-bottom: 1rem;">S3-compatible private storage</p>
+                <ul class="features-list">
+                    <li>No egress fees</li>
+                    <li>11 nines durability</li>
+                    <li>API and CLI access</li>
+                    <li>Encryption at rest</li>
+                    <li>Geographic redundancy option</li>
+                    <li>Minimum 10TB commitment</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Network Cabling</h3>
+                <div class="price">$95<span>/drop</span></div>
+                <p style="color: #888; margin-bottom: 1rem;">Professional copper and fiber installation</p>
+                <ul class="features-list">
+                    <li>Cat6A certified cabling</li>
+                    <li>Patch panel termination</li>
+                    <li>Fluke testing included</li>
+                    <li>Cable labeling and documentation</li>
+                    <li>25-drop minimum</li>
+                    <li>5-year warranty</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <h3>Fiber Optic Installation</h3>
+                <div class="price">$14<span>/linear foot</span></div>
+                <p style="color: #888; margin-bottom: 1rem;">Single-mode and multimode fiber deployment</p>
+                <ul class="features-list">
+                    <li>OS2 single-mode fiber</li>
+                    <li>Fusion splicing</li>
+                    <li>OTDR testing and reports</li>
+                    <li>As-built documentation</li>
+                    <li>1,000 ft minimum</li>
+                    <li>10-year warranty</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2 class="section-title">Cost <span class="gold-text">Comparison</span></h2>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Service</th>
+                    <th>AWS Equivalent</th>
+                    <th>Monthly Cost</th>
+                    <th>MJ Engineering</th>
+                    <th>Monthly Cost</th>
+                    <th>Annual Savings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GPU Compute</td>
+                    <td>p4d.24xlarge</td>
+                    <td style="color: #ff4444;">$32,000</td>
+                    <td>MI250X Cluster</td>
+                    <td style="color: #27c93f;">$2,800</td>
+                    <td style="color: #d4af37; font-weight: 600;">$350,400</td>
+                </tr>
+                <tr>
+                    <td>Storage</td>
+                    <td>S3 Standard 100TB</td>
+                    <td style="color: #ff4444;">$2,300</td>
+                    <td>Private Object Store</td>
+                    <td style="color: #27c93f;">$1,500</td>
+                    <td style="color: #d4af37; font-weight: 600;">$9,600</td>
+                </tr>
+                <tr>
+                    <td>API Calls</td>
+                    <td>OpenAI Enterprise</td>
+                    <td style="color: #ff4444;">$15,000+</td>
+                    <td>Professional Tier</td>
+                    <td style="color: #27c93f;">$499 + usage</td>
+                    <td style="color: #d4af37; font-weight: 600;">$170,000+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to reduce your cloud costs?</h2>
+        <p style="color: #888; margin: 1rem 0 2rem;">Schedule a consultation to discuss your infrastructure needs</p>
+        <a href="contact.html" class="btn btn-primary">Contact Sales Team</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>MJ Engineering</h4>
+                <p>Dallas, Texas</p>
+                <p>Data Infrastructure Specialists</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="data-solutions.html">Data Solutions</a></li>
+                    <li><a href="underground.html">Underground</a></li>
+                    <li><a href="network-builder.html">Network Builder</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>info@mjengineering.com</p>
+                <p>+1 (214) 555-0199</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MJ Engineering. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

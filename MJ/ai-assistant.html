@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MJ Engineering AI Assistant - Secure Engineering AI">
+    <title>AI Assistant | MJ Engineering</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --bg-elevated: #30363d;
+            --border-color: #30363d;
+            --border-hover: #8b949e;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #238636;
+            --accent-gold: #d4af37;
+            --accent-red: #dc2626;
+            --accent-purple: #a371f7;
+            --sidebar-width: 280px;
+            --right-sidebar-width: 300px;
+            --header-height: 96px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Dallas Skyline Background */
+        .dallas-skyline-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to bottom, rgba(13, 17, 23, 0.95), rgba(13, 17, 23, 0.98)),
+                              url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=3840&q=80');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            min-height: var(--header-height);
+            background: rgba(22, 27, 34, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            row-gap: 0.55rem;
+            padding: 0.7rem 1.5rem 0.55rem;
+            z-index: 100;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            text-decoration: none;
+        }
+
+        .nav-brand-logo {
+            height: 42px;
+            width: auto;
+            display: block;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.28));
+        }
+
+        .nav-brand-copy {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .nav-brand .logo-text {
+            color: var(--text-primary);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .nav-brand .logo-subtext {
+            color: var(--accent-gold);
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .top-nav-meta {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 0.45rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .top-nav-meta span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .top-nav-meta span:last-child {
+            color: var(--accent-gold);
+            text-align: right;
+        }
+
+        .model-selector {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .model-badge {
+            background: var(--accent-gold);
+            color: #000;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 0.4rem 0.8rem;
+            background: rgba(35, 134, 54, 0.1);
+            border: 1px solid rgba(35, 134, 54, 0.3);
+            border-radius: 20px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            background: var(--bg-tertiary);
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+
+        /* Main Layout */
+        .app-container {
+            display: flex;
+            height: 100vh;
+            padding-top: var(--header-height);
+        }
+
+        /* Left Sidebar - History */
+        .sidebar-left {
+            width: var(--sidebar-width);
+            background: rgba(22, 27, 34, 0.95);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .new-chat-btn {
+            width: calc(100% - 2rem);
+            margin: 1rem;
+            padding: 0.75rem;
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .new-chat-btn:hover {
+            background: transparent;
+            box-shadow: inset 0 0 0 2px var(--accent-red);
+        }
+
+        .conversation-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+
+        .conversation-item {
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .conversation-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .conversation-item.active {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent-gold);
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .conversation-icon {
+            font-size: 1.1rem;
+        }
+
+        .conversation-text {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .conversation-time {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+
+        .sidebar-footer {
+            padding: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .user-profile:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: white;
+            font-size: 0.8rem;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .user-role {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        /* Center Chat Area */
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(13, 17, 23, 0.95);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-toolbar {
+            height: 50px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            background: rgba(22, 27, 34, 0.5);
+        }
+
+        .toolbar-title {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .toolbar-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .toolbar-btn {
+            padding: 0.4rem 0.8rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-color: var(--accent-gold);
+        }
+
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .message {
+            display: flex;
+            gap: 1rem;
+            max-width: 100%;
+            animation: messageIn 0.3s ease;
+        }
+
+        @keyframes messageIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .message.user .message-avatar {
+            background: var(--accent-blue);
+        }
+
+        .message.assistant .message-avatar {
+            background: linear-gradient(135deg, var(--accent-gold), var(--accent-red));
+        }
+
+        .message-content {
+            flex: 1;
+            max-width: calc(100% - 60px);
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .message-author {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .message-time {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        .message-body {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .message.user .message-body {
+            background: rgba(88, 166, 255, 0.1);
+            border-color: rgba(88, 166, 255, 0.3);
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .message:hover .message-actions {
+            opacity: 1;
+        }
+
+        .message-action-btn {
+            padding: 0.25rem 0.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .message-action-btn:hover {
+            background: var(--bg-elevated);
+            color: var(--accent-gold);
+        }
+
+        /* Input Area */
+        .input-container {
+            border-top: 1px solid var(--border-color);
+            background: rgba(22, 27, 34, 0.95);
+            padding: 1.5rem;
+        }
+
+        .input-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .input-toolbar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .input-tool {
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .input-tool:hover {
+            background: var(--bg-elevated);
+            color: var(--accent-gold);
+        }
+
+        .chat-input {
+            width: 100%;
+            min-height: 60px;
+            max-height: 200px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+        }
+
+        .chat-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .input-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .input-hint {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .send-btn {
+            padding: 0.6rem 1.2rem;
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover:not(:disabled) {
+            background: transparent;
+            box-shadow: inset 0 0 0 2px var(--accent-red);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .suggested-prompts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .prompt-chip {
+            padding: 0.5rem 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 20px;
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .prompt-chip:hover {
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Right Sidebar - Upload/Context */
+        .sidebar-right {
+            width: var(--right-sidebar-width);
+            background: rgba(22, 27, 34, 0.95);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel-section {
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem;
+        }
+
+        .panel-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .upload-area:hover {
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .upload-hint {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .file-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .file-icon {
+            font-size: 1.2rem;
+        }
+
+        .file-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .file-name {
+            color: var(--text-primary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .file-meta {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+        }
+
+        .file-remove {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.25rem;
+            border-radius: 4px;
+        }
+
+        .file-remove:hover {
+            background: rgba(220, 38, 38, 0.2);
+            color: var(--accent-red);
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .setting-row:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .setting-value {
+            color: var(--text-primary);
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+
+        .slider-container {
+            margin-top: 0.5rem;
+        }
+
+        .slider {
+            width: 100%;
+            height: 4px;
+            background: var(--bg-elevated);
+            border-radius: 2px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .token-usage {
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .usage-bar {
+            height: 6px;
+            background: var(--bg-elevated);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .usage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-gold));
+            border-radius: 3px;
+            transition: width 0.3s;
+        }
+
+        .usage-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #0d1117;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        .code-lang {
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .code-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .code-action {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .code-action:hover {
+            background: var(--bg-elevated);
+            color: var(--accent-gold);
+        }
+
+        .code-content {
+            padding: 1rem;
+            overflow-x: auto;
+        }
+
+        .code-content pre {
+            margin: 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 0.25rem;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            width: fit-content;
+            border: 1px solid var(--border-color);
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typingBounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .welcome-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-title {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text {
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-elevated);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--border-hover);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .sidebar-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav-center {
+                display: none;
+            }
+
+            .top-nav {
+                padding: 0.7rem 1rem 0.55rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 0.7rem 0.9rem 0.5rem;
+            }
+
+            .nav-brand-logo {
+                height: 36px;
+            }
+
+            .top-nav-meta span {
+                font-size: 0.72rem;
+                letter-spacing: 0.08em;
+            }
+
+            .status-indicator span {
+                display: none;
+            }
+
+            .sidebar-left {
+                display: none;
+            }
+            
+            .chat-main {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .status-indicator {
+                display: none;
+            }
+
+            .nav-right {
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dallas-skyline-bg"></div>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="index.html" class="nav-brand">
+            <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="nav-brand-logo">
+            <span class="nav-brand-copy">
+                <span class="logo-text">AI Assistant</span>
+                <span class="logo-subtext">Private engineering workspace</span>
+            </span>
+        </a>
+        
+        <div class="nav-center">
+            <select class="model-selector" id="modelSelector">
+                <option value="mj-engineering">MJ-Engineering-v2.1</option>
+                <option value="gpt-4">GPT-4 Turbo</option>
+                <option value="claude-3">Claude 3 Opus</option>
+                <option value="code-llama">Code Llama 70B</option>
+            </select>
+            <span class="model-badge">PRIVATE</span>
+        </div>
+
+        <div class="nav-right">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>Air-Gapped</span>
+            </div>
+            <button class="icon-btn" onclick="toggleSettings()" title="Settings">⚙️</button>
+            <button class="icon-btn" onclick="clearChat()" title="Clear Chat">🗑️</button>
+        </div>
+        <div class="top-nav-meta" aria-label="MJ Engineering positioning">
+            <span>Independent Network Solutions</span>
+            <span>Tier IV Data Center</span>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Left Sidebar - History -->
+        <aside class="sidebar-left">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Conversations</span>
+                <button class="icon-btn" style="width: 28px; height: 28px; font-size: 1rem;" onclick="newChat()" title="New Chat">+</button>
+            </div>
+            
+            <button class="new-chat-btn" onclick="newChat()">
+                <span>+</span>
+                New Conversation
+            </button>
+
+            <div class="conversation-list" id="conversationList">
+                <div class="conversation-item active" onclick="loadConversation(0)">
+                    <span class="conversation-icon">💬</span>
+                    <span class="conversation-text">Network Architecture Review</span>
+                    <span class="conversation-time">2m</span>
+                </div>
+                <div class="conversation-item" onclick="loadConversation(1)">
+                    <span class="conversation-icon">🔧</span>
+                    <span class="conversation-text">Trenching Equipment Specs</span>
+                    <span class="conversation-time">1h</span>
+                </div>
+                <div class="conversation-item" onclick="loadConversation(2)">
+                    <span class="conversation-icon">📊</span>
+                    <span class="conversation-text">Fiber Cost Analysis Q3</span>
+                    <span class="conversation-time">3h</span>
+                </div>
+                <div class="conversation-item" onclick="loadConversation(3)">
+                    <span class="conversation-icon">💻</span>
+                    <span class="conversation-text">Code Review: DMS Module</span>
+                    <span class="conversation-time">1d</span>
+                </div>
+                <div class="conversation-item" onclick="loadConversation(4)">
+                    <span class="conversation-icon">📋</span>
+                    <span class="conversation-text">Project Requirements</span>
+                    <span class="conversation-time">2d</span>
+                </div>
+                <div class="conversation-item" onclick="loadConversation(5)">
+                    <span class="conversation-icon">⚡</span>
+                    <span class="conversation-text">Emergency: Line Strike</span>
+                    <span class="conversation-time">3d</span>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">EN</div>
+                    <div class="user-info">
+                        <div class="user-name">Engineering Team</div>
+                        <div class="user-role">Professional Plan</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Chat Area -->
+        <main class="chat-main">
+            <div class="chat-toolbar">
+                <span class="toolbar-title">Current Conversation</span>
+                <div class="toolbar-actions">
+                    <button class="toolbar-btn" onclick="exportChat()">Export</button>
+                    <button class="toolbar-btn" onclick="shareChat()">Share</button>
+                </div>
+            </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <div class="message assistant">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">MJ Engineering AI</span>
+                            <span class="message-time">Just now</span>
+                        </div>
+                        <div class="message-body">
+                            <p>Welcome to the MJ Engineering AI Assistant. I'm running on secure, air-gapped infrastructure in Dallas, Texas.</p>
+                            <p style="margin-top: 1rem;"><strong>I can help you with:</strong></p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                                <li>Network architecture and fiber optic calculations</li>
+                                <li>Underground utility specifications and NEC compliance</li>
+                                <li>Equipment rental recommendations</li>
+                                <li>Code generation for automation and PLC programming</li>
+                                <li>Technical documentation and engineering standards</li>
+                            </ul>
+                            <p>Upload technical documents using the panel on the right, or start typing below.</p>
+                        </div>
+                        <div class="message-actions">
+                            <button class="message-action-btn" onclick="copyMessage(this)">📋 Copy</button>
+                            <button class="message-action-btn" onclick="regenerateMessage(this)">↻ Regenerate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <div class="input-toolbar">
+                        <button class="input-tool" title="Attach File" onclick="document.getElementById('fileInput').click()">📎</button>
+                        <button class="input-tool" title="Code Block">⌨️</button>
+                        <button class="input-tool" title="Image">🖼️</button>
+                        <button class="input-tool" title="Voice">🎤</button>
+                    </div>
+                    <textarea 
+                        class="chat-input" 
+                        id="chatInput" 
+                        placeholder="Message MJ Engineering AI... (Shift+Enter for new line)"
+                        onkeydown="handleKeyDown(event)"
+                        oninput="autoResize(this)"
+                    ></textarea>
+                    <div class="input-footer">
+                        <span class="input-hint">Press Enter to send • All conversations are encrypted and ephemeral</span>
+                        <button class="send-btn" id="sendBtn" onclick="sendMessage()">
+                            Send →
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="suggested-prompts">
+                    <span class="prompt-chip" onclick="usePrompt('What are the NEC burial depths for electrical conduit?')">NEC burial depths</span>
+                    <span class="prompt-chip" onclick="usePrompt('Calculate fiber link budget for 10km at 1550nm')">Fiber link budget</span>
+                    <span class="prompt-chip" onclick="usePrompt('What size trencher do I need for 500ft of 6 inch pipe?')">Equipment sizing</span>
+                    <span class="prompt-chip" onclick="usePrompt('Generate Python for reading Modbus TCP registers')">Modbus Python code</span>
+                    <span class="prompt-chip" onclick="usePrompt('Compare private 5G vs fiber for industrial automation')">5G vs Fiber</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Upload & Context -->
+        <aside class="sidebar-right">
+            <!-- File Upload Section -->
+            <div class="panel-section">
+                <div class="panel-title">
+                    <span>Context Files</span>
+                    <span style="font-size: 0.75rem; color: var(--accent-gold);">3/5</span>
+                </div>
+                
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Drop files here</div>
+                    <div class="upload-hint">PDF, DOC, TXT, CSV up to 10MB</div>
+                </div>
+                <input type="file" id="fileInput" style="display: none;" multiple onchange="handleFiles(this.files)">
+
+                <div class="file-list" id="fileList">
+                    <div class="file-item">
+                        <span class="file-icon">📄</span>
+                        <div class="file-info">
+                            <div class="file-name">network-specs-v2.pdf</div>
+                            <div class="file-meta">2.4 MB • Active</div>
+                        </div>
+                        <button class="file-remove" onclick="removeFile(this)">×</button>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-icon">📊</span>
+                        <div class="file-info">
+                            <div class="file-name">cost-analysis-q3.xlsx</div>
+                            <div class="file-meta">1.8 MB • Active</div>
+                        </div>
+                        <button class="file-remove" onclick="removeFile(this)">×</button>
+                    </div>
+                    <div class="file-item">
+                        <span class="file-icon">📝</span>
+                        <div class="file-info">
+                            <div class="file-name">project-requirements.txt</div>
+                            <div class="file-meta">45 KB • Active</div>
+                        </div>
+                        <button class="file-remove" onclick="removeFile(this)">×</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parameters Section -->
+            <div class="panel-section">
+                <div class="panel-title">Parameters</div>
+                
+                <div class="setting-row">
+                    <span class="setting-label">Temperature</span>
+                    <span class="setting-value" id="tempValue">0.7</span>
+                </div>
+                <div class="slider-container">
+                    <input type="range" min="0" max="100" value="70" class="slider" oninput="updateTemp(this.value)">
+                </div>
+
+                <div class="setting-row" style="margin-top: 1rem;">
+                    <span class="setting-label">Max Tokens</span>
+                    <span class="setting-value">4,096</span>
+                </div>
+
+                <div class="setting-row">
+                    <span class="setting-label">Context Window</span>
+                    <span class="setting-value">128k</span>
+                </div>
+
+                <div class="setting-row">
+                    <span class="setting-label">Response Format</span>
+                    <span class="setting-value">Markdown</span>
+                </div>
+            </div>
+
+            <!-- Token Usage Section -->
+            <div class="panel-section">
+                <div class="panel-title">Token Usage</div>
+                
+                <div class="token-usage">
+                    <div class="usage-text">
+                        <span>Session Usage</span>
+                        <span>4,920 / 100,000</span>
+                    </div>
+                    <div class="usage-bar">
+                        <div class="usage-fill" style="width: 5%;"></div>
+                    </div>
+                    <div class="usage-text" style="margin-top: 0.5rem;">
+                        <span style="color: var(--text-secondary);">Resets in 3 hours</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.85rem;">
+                    <div style="background: var(--bg-tertiary); padding: 0.75rem; border-radius: 6px;">
+                        <div style="color: var(--text-secondary); font-size: 0.75rem;">Prompt</div>
+                        <div style="color: var(--text-primary); font-weight: 600;">1,240</div>
+                    </div>
+                    <div style="background: var(--bg-tertiary); padding: 0.75rem; border-radius: 6px;">
+                        <div style="color: var(--text-secondary); font-size: 0.75rem;">Completion</div>
+                        <div style="color: var(--text-primary); font-weight: 600;">3,680</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="panel-section" style="border-bottom: none;">
+                <div class="panel-title">System Status</div>
+                
+                <div class="setting-row">
+                    <span class="setting-label">GPU Load</span>
+                    <span class="setting-value" style="color: var(--accent-green);">34%</span>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Latency</span>
+                    <span class="setting-value">12ms</span>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Queue</span>
+                    <span class="setting-value">0</span>
+                </div>
+                <div class="setting-row">
+                    <span class="setting-label">Version</span>
+                    <span class="setting-value">v2.1.4</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Auto-resize textarea
+        function autoResize(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = Math.min(textarea.scrollHeight, 200) + 'px';
+        }
+
+        // Handle Enter key
+        function handleKeyDown(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        }
+
+        // Use suggested prompt
+        function usePrompt(text) {
+            document.getElementById('chatInput').value = text;
+            document.getElementById('chatInput').focus();
+            autoResize(document.getElementById('chatInput'));
+        }
+
+        // Update temperature
+        function updateTemp(value) {
+            document.getElementById('tempValue').textContent = (value / 100).toFixed(1);
+        }
+
+        // Send message
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            
+            // Clear input
+            input.value = '';
+            input.style.height = 'auto';
+            
+            // Show typing indicator
+            showTyping();
+            
+            // Generate response
+            setTimeout(() => {
+                removeTyping();
+                const response = generateResponse(message);
+                addMessage(response, 'assistant');
+            }, 1500);
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+            const container = document.getElementById('messagesContainer');
+            const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            
+            const isCode = text.includes('```');
+            let bodyContent = text;
+            
+            if (isCode) {
+                bodyContent = formatCodeBlocks(text);
+            } else {
+                bodyContent = text.replace(/\n/g, '<br>');
+            }
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${sender === 'user' ? '👤' : '🤖'}</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-author">${sender === 'user' ? 'You' : 'MJ Engineering AI'}</span>
+                        <span class="message-time">${time}</span>
+                    </div>
+                    <div class="message-body">${bodyContent}</div>
+                    ${sender === 'assistant' ? `
+                    <div class="message-actions">
+                        <button class="message-action-btn" onclick="copyMessage(this)">📋 Copy</button>
+                        <button class="message-action-btn" onclick="regenerateMessage(this)">↻ Regenerate</button>
+                        <button class="message-action-btn">👍</button>
+                        <button class="message-action-btn">👎</button>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+            
+            // Highlight code blocks
+            if (isCode) {
+                messageDiv.querySelectorAll('pre code').forEach((block) => {
+                    hljs.highlightBlock(block);
+                });
+            }
+        }
+
+        // Format code blocks
+        function formatCodeBlocks(text) {
+            const parts = text.split('```');
+            let result = '';
+            
+            for (let i = 0; i < parts.length; i++) {
+                if (i % 2 === 0) {
+                    if (parts[i].trim()) {
+                        result += `<p>${parts[i].replace(/\n/g, '<br>')}</p>`;
+                    }
+                } else {
+                    const lines = parts[i].split('\n');
+                    const lang = lines[0].trim() || 'text';
+                    const code = lines.slice(1).join('\n');
+                    
+                    result += `
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-lang">${lang}</span>
+                                <div class="code-actions">
+                                    <button class="code-action" onclick="copyCode(this)">Copy</button>
+                                    <button class="code-action">Download</button>
+                                </div>
+                            </div>
+                            <div class="code-content">
+                                <pre><code class="language-${lang}">${escapeHtml(code)}</code></pre>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            return result;
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Copy code
+        function copyCode(btn) {
+            const code = btn.closest('.code-block').querySelector('code').textContent;
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+
+        // Copy message
+        function copyMessage(btn) {
+            const message = btn.closest('.message').querySelector('.message-body').textContent;
+            navigator.clipboard.writeText(message);
+            btn.textContent = '✓ Copied';
+            setTimeout(() => btn.textContent = '📋 Copy', 2000);
+        }
+
+        // Regenerate message
+        function regenerateMessage(btn) {
+            const messageDiv = btn.closest('.message');
+            messageDiv.style.opacity = '0.5';
+            setTimeout(() => {
+                messageDiv.style.opacity = '1';
+            }, 500);
+        }
+
+        // Show typing indicator
+        function showTyping() {
+            const container = document.getElementById('messagesContainer');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message assistant';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🤖</div>
+                <div class="message-content">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(typingDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        // Remove typing indicator
+        function removeTyping() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) indicator.remove();
+        }
+
+        // Generate AI response
+        function generateResponse(userMessage) {
+            const lower = userMessage.toLowerCase();
+            
+            if (lower.includes('nec') && lower.includes('burial')) {
+                return `**NEC Electrical Conduit Burial Depths (Article 300.5):**
+
+**Direct Buried Cables:**
+- Residential: 24 inches minimum
+- Commercial: 24 inches minimum  
+- Under streets/highways: 30 inches minimum
+
+**Rigid/IMC Conduit:**
+- Residential: 6 inches (with GFCI protection)
+- Commercial: 6 inches
+- Under streets: 24 inches
+
+**PVC Conduit:**
+- Residential: 18 inches
+- Commercial: 18 inches
+
+**Notes:**
+- Call 811 before digging (we handle utility locates)
+- Reduce depths by 6" for solid rock with protection
+- Warning tape required 12" above direct-buried cables
+
+Would you like specific details for your application?`;
+            }
+            
+            if (lower.includes('fiber') && lower.includes('budget')) {
+                return `**Fiber Optic Link Budget Calculation:**
+
+Here's a Python function to calculate your link budget:
+
+\`\`\`python
+def fiber_link_budget(distance_km, wavelength=1550):
+    # Attenuation coefficients (dB/km)
+    attenuation = {
+        1310: 0.35,
+        1550: 0.20,
+        1625: 0.25
+    }
+    
+    # Typical component losses
+    connector_loss = 0.5  # dB per pair
+    splice_loss = 0.1     # dB per splice
+    margin = 3.0          # Safety margin
+    
+    # Calculate
+    fiber_loss = distance_km * attenuation.get(wavelength, 0.25)
+    total_loss = fiber_loss + connector_loss + splice_loss + margin
+    
+    return {
+        'fiber_loss_db': round(fiber_loss, 2),
+        'total_budget_db': round(total_loss, 2),
+        'max_distance_km': distance_km
+    }
+
+# Example: 10km at 1550nm
+result = fiber_link_budget(10)
+print(f"Total loss: {result['total_budget_db']} dB")
+\`\`\`
+
+**For 10km at 1550nm:**
+- Fiber loss: 2.0 dB
+- Total budget: ~3.6 dB with margin
+- Standard transceivers (0 to -28 dBm sensitivity) have plenty of margin
+
+Need OTDR testing services? We provide certified fiber testing.`;
+            }
+            
+            if (lower.includes('trencher') && lower.includes('size')) {
+                return `**Trencher Sizing for 6" Pipe:**
+
+For 500 linear feet of 6" diameter pipe, I recommend:
+
+**Ride-On Trencher (48" depth capacity)**
+- Width: 8-12 inches (need 2" clearance each side)
+- Rate: 100-150 ft/hour in normal soil
+- Cost: $350/day or $1,200/week
+
+**Specifications:**
+- Trench width: Minimum 10" (6" pipe + 4" clearance)
+- Depth: Pipe diameter + 18" cover (residential) or 30" (commercial)
+- Bedding: 4" sand base required
+
+**Time Estimate:**
+- 500 ft / 125 ft/hr = 4 hours trenching
+- Plus setup, bedding, backfill: 1 day total
+
+**Alternative:** If access is tight, our mini-excavator with trenching bucket can work in 60" gates.
+
+Would you like me to schedule this equipment?`;
+            }
+            
+            if (lower.includes('modbus') || lower.includes('python')) {
+                return `**Python Modbus TCP Client:**
+
+\`\`\`python
+from pymodbus.client import ModbusTcpClient
+
+def read_modbus_registers(ip, port=502, unit_id=1, start=0, count=10):
+    """
+    Read holding registers from Modbus TCP device
+    """
+    client = ModbusTcpClient(ip, port=port)
+    
+    try:
+        if client.connect():
+            result = client.read_holding_registers(
+                address=start,
+                count=count,
+                slave=unit_id
+            )
+            
+            if result.isError():
+                print(f"Modbus error: {result}")
+                return None
+                
+            return result.registers
+        else:
+            print("Failed to connect")
+            return None
+            
+    finally:
+        client.close()
+
+# Example usage
+registers = read_modbus_registers('192.168.1.100', count=10)
+if registers:
+    for i, value in enumerate(registers):
+        print(f"Register {40001+i}: {value}")
+\`\`\`
+
+**Requirements:**
+\`pip install pymodbus\`
+
+This works with most PLCs (Allen-Bradley, Siemens, Schneider). Need help with a specific device?`;
+            }
+            
+            return `I understand you're asking about "${userMessage}".
+
+As your engineering AI assistant, I can provide detailed technical guidance on:
+
+• **Underground Infrastructure** - NEC codes, trenching specs, boring calculations
+• **Network Design** - Fiber optics, 5G planning, cable management
+• **Equipment Specifications** - Sizing, capabilities, rental recommendations
+• **Software/Automation** - Python, PLC ladder logic, SCADA integration
+• **Data Solutions** - Infrastructure design, cost analysis, deployment planning
+
+Could you provide more specific details about your project requirements? This will help me give you precise engineering guidance rather than general information.`;
+        }
+
+        // File handling
+        function handleFiles(files) {
+            const fileList = document.getElementById('fileList');
+            
+            Array.from(files).forEach(file => {
+                const fileDiv = document.createElement('div');
+                fileDiv.className = 'file-item';
+                fileDiv.innerHTML = `
+                    <span class="file-icon">📄</span>
+                    <div class="file-info">
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-meta">${(file.size / 1024 / 1024).toFixed(1)} MB • Processing</div>
+                    </div>
+                    <button class="file-remove" onclick="removeFile(this)">×</button>
+                `;
+                fileList.appendChild(fileDiv);
+            });
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            handleFiles(e.dataTransfer.files);
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        function removeFile(btn) {
+            btn.closest('.file-item').remove();
+        }
+
+        // Conversation management
+        function newChat() {
+            document.getElementById('messagesContainer').innerHTML = `
+                <div class="message assistant">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-author">MJ Engineering AI</span>
+                            <span class="message-time">Just now</span>
+                        </div>
+                        <div class="message-body">
+                            <p>Welcome to the MJ Engineering AI Assistant. I'm running on secure, air-gapped infrastructure in Dallas, Texas.</p>
+                            <p style="margin-top: 1rem;"><strong>I can help you with:</strong></p>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem; margin-bottom: 1rem;">
+                                <li>Network architecture and fiber optic calculations</li>
+                                <li>Underground utility specifications and NEC compliance</li>
+                                <li>Equipment rental recommendations</li>
+                                <li>Code generation for automation and PLC programming</li>
+                                <li>Technical documentation and engineering standards</li>
+                            </ul>
+                            <p>Upload technical documents using the panel on the right, or start typing below.</p>
+                        </div>
+                        <div class="message-actions">
+                            <button class="message-action-btn" onclick="copyMessage(this)">📋 Copy</button>
+                            <button class="message-action-btn" onclick="regenerateMessage(this)">↻ Regenerate</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Update active state
+            document.querySelectorAll('.conversation-item').forEach(item => {
+                item.classList.remove('active');
+            });
+        }
+
+        function loadConversation(id) {
+            document.querySelectorAll('.conversation-item').forEach((item, index) => {
+                item.classList.toggle('active', index === id);
+            });
+        }
+
+        function clearChat() {
+            if (confirm('Clear current conversation?')) {
+                newChat();
+            }
+        }
+
+        function exportChat() {
+            const messages = document.querySelectorAll('.message');
+            let exportText = 'MJ Engineering AI - Conversation Export\n';
+            exportText += '=' .repeat(50) + '\n\n';
+            
+            messages.forEach(msg => {
+                const author = msg.querySelector('.message-author').textContent;
+                const time = msg.querySelector('.message-time').textContent;
+                const body = msg.querySelector('.message-body').textContent;
+                exportText += `[${time}] ${author}:\n${body}\n\n`;
+            });
+            
+            const blob = new Blob([exportText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `mj-ai-chat-${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function shareChat() {
+            alert('Share link copied to clipboard!');
+        }
+
+        function toggleSettings() {
+            alert('Settings panel would open here');
+        }
+
+        // Focus input on load
+        document.getElementById('chatInput').focus();
+    </script>
+</body>
+</html>

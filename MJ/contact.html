@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact MJ Engineering - Dallas infrastructure solutions, quotes, and support">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Contact | MJ Engineering</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-padding-top: 140px;
+        }
+        
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 5%;
+        }
+        
+        .contact-info-section h2 {
+            color: #d4af37;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .contact-info-section > p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid #333;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .contact-method:hover {
+            border-color: #d4af37;
+            transform: translateX(5px);
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(220, 38, 38, 0.1);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #dc2626;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .contact-details a {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.25rem;
+            transition: color 0.3s;
+        }
+        
+        .contact-details a:hover {
+            color: #fff;
+        }
+        
+        .contact-details p {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .hours-box {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .hours-box h3 {
+            color: #d4af37;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        
+        .hours-list {
+            list-style: none;
+        }
+        
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            color: #aaa;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .hours-list .day {
+            color: #fff;
+        }
+        
+        .form-container {
+            background: rgba(26, 26, 26, 0.9);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 3rem;
+        }
+        
+        .form-container h2 {
+            color: #d4af37;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-container > p {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .form-group label .required {
+            color: #dc2626;
+            margin-left: 2px;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            background: rgba(10, 10, 10, 0.9);
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #666;
+        }
+        
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23d4af37' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+        
+        .form-group select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: #dc2626;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            cursor: pointer;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background: #dc2626;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-submit:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+        
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+        
+        .emergency-banner {
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.05));
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin: 4rem auto;
+            max-width: 800px;
+        }
+        
+        .emergency-banner h3 {
+            color: #dc2626;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .emergency-banner p {
+            color: #aaa;
+            margin-bottom: 1rem;
+        }
+        
+        .emergency-phone {
+            font-size: 2rem;
+            color: #d4af37;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+        
+        .emergency-phone:hover {
+            color: #fff;
+        }
+        
+        /* Accessibility enhancements */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #d4af37;
+            color: #000;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+            font-weight: 600;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .reveal-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .main-nav.scrolled {
+            background: rgba(26, 26, 26, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid #d4af37;
+            outline-offset: 2px;
+        }
+        
+        a:focus:not(:focus-visible) {
+            outline: none;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            html {
+                scroll-behavior: auto;
+            }
+        }
+        
+        @media print {
+            .main-nav, .emergency-banner, footer {
+                display: none;
+            }
+            .form-container {
+                border: 1px solid #000;
+            }
+        }
+        
+        @media (max-width: 968px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.98);
+            padding: 1rem;
+            border-top: 1px solid #333;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+        
+        .btn {
+            touch-action: manipulation;
+        }
+        
+        .page-header {
+            padding-top: 148px;
+            text-align: center;
+            padding-bottom: 3rem;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .page-header p {
+            color: #888;
+            font-size: 1.2rem;
+        }
+        
+        .gold-text {
+            color: #d4af37;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <div class="dallas-skyline-bg"></div>
+    
+    <nav class="main-nav" id="mainNav" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="logo" aria-label="MJ Engineering home">
+            <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="logo-mark">
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="industries.html">Industries</a></li>
+            <li><a href="data-solutions.html">Data Solutions</a></li>
+            <li><a href="underground.html">Underground & Rental</a></li>
+            <li><a href="network-builder.html">Network Builder</a></li>
+            <li><a href="ai-assistant.html">AI Assistant</a></li>
+            <li><a href="contact.html" class="active" aria-current="page">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-brand-strip" aria-label="MJ Engineering positioning">
+            <span class="nav-brand-message">Independent Network Solutions</span>
+            <span class="nav-brand-message">Tier IV Data Center</span>
+        </div>
+    </nav>
+
+    <header class="page-header" id="main-content">
+        <h1>Contact <span class="gold-text">MJ Engineering</span></h1>
+        <p>Get in touch for quotes, support, or infrastructure consultations</p>
+    </header>
+
+    <section class="contact-layout">
+        <div class="contact-info-section">
+            <h2>Let's Discuss Your Project</h2>
+            <p>Whether you need underground infrastructure, data center solutions, or network deployment, our team is ready to provide expert consultation and competitive quotes.</p>
+            
+            <div class="contact-method">
+                <div class="contact-icon">📧</div>
+                <div class="contact-details">
+                    <h3>Email</h3>
+                    <a href="mailto:info@mjengineering.com">info@mjengineering.com</a>
+                    <p>For quotes and general inquiries</p>
+                </div>
+            </div>
+            
+            <div class="contact-method">
+                <div class="contact-icon">📞</div>
+                <div class="contact-details">
+                    <h3>Phone</h3>
+                    <a href="tel:+12145550199">+1 (214) 555-0199</a>
+                    <p>Monday - Friday, 8am - 6pm CST</p>
+                </div>
+            </div>
+            
+            <div class="contact-method">
+                <div class="contact-icon">📍</div>
+                <div class="contact-details">
+                    <h3>Location</h3>
+                    <p style="color: #d4af37; font-size: 1.1rem; margin-bottom: 0.25rem;">Dallas, Texas</p>
+                    <p>Serving DFW metroplex and statewide</p>
+                </div>
+            </div>
+            
+            <div class="hours-box">
+                <h3>Business Hours</h3>
+                <ul class="hours-list">
+                    <li><span class="day">Monday - Friday</span> <span>8:00 AM - 6:00 PM</span></li>
+                    <li><span class="day">Saturday</span> <span>9:00 AM - 2:00 PM</span></li>
+                    <li><span class="day">Sunday</span> <span>Closed</span></li>
+                    <li><span class="day">Emergency Support</span> <span style="color: #dc2626;">24/7</span></li>
+                </ul>
+            </div>
+
+            <div class="hours-box">
+                <h3>Helpful for Faster Quotes</h3>
+                <ul class="hours-list">
+                    <li><span class="day">Project Type</span> <span>Data, fiber, utility, software</span></li>
+                    <li><span class="day">Service Area</span> <span>City or site location</span></li>
+                    <li><span class="day">Timeline</span> <span>Budgetary, bid, or urgent</span></li>
+                    <li><span class="day">Constraints</span> <span>Access, permits, shutdowns</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <h2>Request a Quote</h2>
+            <p>Fill out the form below and we'll respond within 24 hours.</p>
+            
+            <form action="#" method="POST" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name <span class="required">*</span></label>
+                        <input type="text" id="firstName" name="firstName" required placeholder="John">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name <span class="required">*</span></label>
+                        <input type="text" id="lastName" name="lastName" required placeholder="Smith">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="john@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required placeholder="(214) 555-0199">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company" placeholder="Your Company">
+                </div>
+                
+                <div class="form-group">
+                    <label for="service">Service Interest <span class="required">*</span></label>
+                    <select id="service" name="service" required>
+                        <option value="" disabled selected>Select a service...</option>
+                        <option value="data-solutions">Data Solutions & Cloud</option>
+                        <option value="underground">Underground Infrastructure</option>
+                        <option value="network">Network Builder & 5G</option>
+                        <option value="ai">AI Assistant & API</option>
+                        <option value="equipment">Equipment Rental</option>
+                        <option value="other">Other / Multiple Services</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Project Details <span class="required">*</span></label>
+                    <textarea id="message" name="message" required placeholder="Describe your project requirements, timeline, and any specific needs..."></textarea>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="urgent" name="urgent">
+                    <label for="urgent">This is an urgent request requiring immediate response</label>
+                </div>
+                
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+    
+    <div class="emergency-banner">
+        <h3>24/7 Emergency Support</h3>
+        <p>For utility strikes, line breaks, and infrastructure failures</p>
+        <a href="tel:+12145550199" class="emergency-phone">+1 (214) 555-0199</a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section footer-brand">
+                <img src="assets/mj-engineering-logo-clean.svg" alt="MJ Engineering" class="footer-mark">
+                <p class="footer-note">Dallas, Texas</p>
+                <p class="footer-description">Reach out for pricing, consultations, field support, or a second look at a scope before it goes live.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="data-solutions.html">Data Solutions</a></li>
+                    <li><a href="underground.html">Underground & Rental</a></li>
+                    <li><a href="network-builder.html">Network Builder</a></li>
+                    <li><a href="ai-assistant.html">AI Assistant</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><a href="mailto:info@mjengineering.com">info@mjengineering.com</a></p>
+                <p><a href="tel:+12145550199">+1 (214) 555-0199</a></p>
+                <p>24/7 Emergency Support</p>
+                <p>Typical response target: within 1 business day</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span class="current-year">2024</span> MJ Engineering. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js" defer></script>
+</body>
+</html>

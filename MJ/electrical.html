@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical &amp; Security Solutions | TRU EMPIRE ENGINEERING</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        header {
+            position: relative;
+            padding: 80px 20px 60px;
+            text-align: center;
+            border-bottom: 3px solid #D4AF37;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1473341304170-971dccb5ac58?w=1920&q=80') center/cover no-repeat;
+            filter: brightness(0.25) saturate(0.7);
+            z-index: 0;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(10,10,0,0.85) 100%);
+            z-index: 1;
+        }
+
+        header > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            background: linear-gradient(135deg, #D4AF37, #FFFFFF, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            text-shadow: 0 0 40px rgba(212,175,55,0.3);
+        }
+
+        .subtitle {
+            color: #C41E3A;
+            font-size: 1.4rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+        }
+
+        nav {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        nav a {
+            color: #D4AF37;
+            text-decoration: none;
+            margin: 0 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a00);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 60px;
+            margin-bottom: 60px;
+            text-align: center;
+            border-left: 5px solid #D4AF37;
+        }
+
+        .hero-section h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .hero-section p {
+            color: #aaaaaa;
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .services-list {
+            display: grid;
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .service-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 40px;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .service-row:hover {
+            border-color: #D4AF37;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .service-row:nth-child(even) {
+            direction: rtl;
+        }
+
+        .service-row:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            text-align: center;
+            color: #C41E3A;
+        }
+
+        .service-content h3 {
+            color: #D4AF37;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .service-content p {
+            color: #aaaaaa;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .certifications {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .certifications h3 {
+            color: #D4AF37;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .cert-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cert-item {
+            color: #888;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            border: 1px solid #444;
+            padding: 15px 25px;
+            border-radius: 5px;
+            background: #151515;
+        }
+
+        .underground-section {
+            background: linear-gradient(135deg, #1a1a0a, #0a0a0a);
+            border: 3px solid #C41E3A;
+            border-radius: 15px;
+            padding: 60px;
+            margin: 60px 0;
+        }
+
+        .underground-section h2 {
+            color: #D4AF37;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+        .underground-intro {
+            color: #aaaaaa;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .underground-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .underground-item {
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .underground-item:hover {
+            border-color: #D4AF37;
+            transform: translateY(-5px);
+        }
+
+        .underground-item .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .underground-item h3 {
+            color: #C41E3A;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .underground-item p {
+            color: #888;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Security Systems Section */
+        .security-section {
+            background: linear-gradient(135deg, #0a0a1a, #1a1a2a);
+            border: 3px solid #27c93f;
+            border-radius: 15px;
+            padding: 60px;
+            margin: 60px 0;
+        }
+
+        .security-section h2 {
+            color: #D4AF37;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-align: center;
+        }
+
+        .security-section .intro-text {
+            color: #aaaaaa;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .security-item {
+            background: rgba(10, 10, 20, 0.8);
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .security-item:hover {
+            border-color: #27c93f;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(39, 201, 63, 0.2);
+        }
+
+        .security-item .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .security-item h3 {
+            color: #27c93f;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .security-item p {
+            color: #888;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .security-item ul {
+            list-style: none;
+            color: #aaa;
+            font-size: 0.85rem;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .security-item ul li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .security-item ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #27c93f;
+        }
+
+        .security-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+        }
+
+        .security-type {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .security-type h4 {
+            color: #D4AF37;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .security-type p {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .image-gallery {
+            margin: 80px 0;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #D4AF37;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #333;
+            transition: all 0.3s;
+            background: #0a0a0a;
+        }
+
+        .gallery-item:hover {
+            border-color: #C41E3A;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 20px;
+            background: rgba(0,0,0,0.9);
+            border-top: 1px solid #333;
+        }
+
+        .gallery-caption h4 {
+            color: #D4AF37;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .gallery-caption p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #000;
+            border-top: 1px solid #333;
+            padding: 40px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        footer p {
+            color: #666;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: #D4AF37;
+            text-decoration: none;
+            border: 1px solid #D4AF37;
+            padding: 15px 30px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: #D4AF37;
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .hero-section { padding: 30px; }
+            .service-row { grid-template-columns: 1fr; text-align: center; }
+            .service-row:nth-child(even) { direction: ltr; }
+            .underground-section { padding: 30px; }
+            .security-section { padding: 30px; }
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TRU EMPIRE ENGINEERING</h1>
+        <div class="subtitle">Electrical &amp; Security Division</div>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="logistics.html">Physical Foundation</a>
+        <a href="technology.html">Systems &amp; Intelligence</a>
+        <a href="electrical.html">Electrical &amp; Security</a>
+        <a href="agriculture.html">Smart Agriculture</a>
+    </nav>
+
+    <div class="container">
+        <div class="hero-section">
+            <h2>Powering Tomorrow's Infrastructure</h2>
+            <p>Licensed master electricians and electrical engineers delivering high-voltage solutions, renewable energy integration, and smart grid technology. We handle everything from commercial tenant improvements to industrial substation construction—plus complete security system installation for residential and commercial properties.</p>
+        </div>
+
+        <div class="services-list">
+            <div class="service-row">
+                <div class="service-icon">⚡</div>
+                <div class="service-content">
+                    <h3>Commercial &amp; Industrial</h3>
+                    <p>Full-scale electrical contracting for manufacturing facilities, data centers, and commercial high-rises. Services include 480V three-phase distribution, emergency generator integration, and arc flash compliance.</p>
+                </div>
+            </div>
+
+            <div class="service-row">
+                <div class="service-icon">🌱</div>
+                <div class="service-content">
+                    <h3>Renewable Energy</h3>
+                    <p>Solar farm construction, battery storage systems, and grid-tie integration. We engineer sustainable power solutions that reduce dependency while maintaining 99.99% uptime reliability standards.</p>
+                </div>
+            </div>
+
+            <div class="service-row">
+                <div class="service-icon">🔧</div>
+                <div class="service-content">
+                    <h3>Smart Grid &amp; Automation</h3>
+                    <p>Advanced metering infrastructure, SCADA-controlled distribution, and IoT-enabled predictive maintenance. Transform your electrical network into an intelligent, self-monitoring system.</p>
+                </div>
+            </div>
+
+            <div class="service-row">
+                <div class="service-icon">🚨</div>
+                <div class="service-content">
+                    <h3>Emergency Services</h3>
+                    <p>24/7 emergency response for critical power failures. Our mobile units carry 500kW temporary power capacity and can restore industrial operations within hours of catastrophic failure.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="security-section">
+            <h2>🔒 Security Systems Installation</h2>
+            <p class="intro-text">
+                Complete security solutions for residential and commercial properties. From basic CCTV systems to enterprise-grade access control networks, we design, install, and maintain integrated security infrastructure that protects what matters most. Licensed, bonded, and insured for your peace of mind.
+            </p>
+            
+            <div class="security-grid">
+                <div class="security-item">
+                    <div class="icon">📹</div>
+                    <h3>CCTV &amp; Surveillance</h3>
+                    <p>High-definition IP camera systems with night vision, motion detection, and remote monitoring capabilities. 4K resolution options with 30+ day local storage and cloud backup.</p>
+                    <ul>
+                        <li>Indoor/outdoor camera systems</li>
+                        <li>PTZ (pan-tilt-zoom) cameras</li>
+                        <li>License plate recognition</li>
+                        <li>Facial recognition integration</li>
+                        <li>Mobile app remote viewing</li>
+                    </ul>
+                </div>
+                
+                <div class="security-item">
+                    <div class="icon">🔐</div>
+                    <h3>Access Control</h3>
+                    <p>Enterprise-grade access management with badge readers, biometric scanners, and cloud-based credential management. Track every entry and exit with detailed audit logs.</p>
+                    <ul>
+                        <li>Keycard and fob systems</li>
+                        <li>Biometric fingerprint readers</li>
+                        <li>Facial recognition access</li>
+                        <li>Visitor management systems</li>
+                        <li>Time and attendance integration</li>
+                    </ul>
+                </div>
+                
+                <div class="security-item">
+                    <div class="icon">📡</div>
+                    <h3>Wireless Security</h3>
+                    <p>Wireless alarm systems, motion sensors, and glass break detectors with cellular backup. No phone line required—professional monitoring with instant police dispatch.</p>
+                    <ul>
+                        <li>Wireless door/window sensors</li>
+                        <li>PIR motion detectors</li>
+                        <li>Glass break sensors</li>
+                        <li>Environmental monitoring</li>
+                        <li>Cellular backup communication</li>
+                    </ul>
+                </div>
+                
+                <div class="security-item">
+                    <div class="icon">🚨</div>
+                    <h3>Intrusion Detection</h3>
+                    <p>Comprehensive burglar alarm systems with 24/7 professional monitoring. Instant alerts to your phone and automatic emergency services dispatch when every second counts.</p>
+                    <ul>
+                        <li>Perimeter protection systems</li>
+                        <li>Interior motion detection</li>
+                        <li>Door/window contacts</li>
+                        <li>Panic buttons and duress codes</li>
+                        <li>24/7 monitoring center</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="security-types">
+                <div class="security-type">
+                    <h4>🏠 Residential</h4>
+                    <p>Home security systems, smart doorbells, garage door monitoring, and family protection packages</p>
+                </div>
+                <div class="security-type">
+                    <h4>🏢 Commercial</h4>
+                    <p>Office buildings, retail spaces, warehouses, and multi-tenant security integration</p>
+                </div>
+                <div class="security-type">
+                    <h4>🏭 Industrial</h4>
+                    <p>Manufacturing facilities, perimeter security, and critical infrastructure protection</p>
+                </div>
+                <div class="security-type">
+                    <h4>🏥 Institutional</h4>
+                    <p>Schools, hospitals, government buildings, and high-security facilities</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="underground-section">
+            <h2>🚧 Underground Utilities &amp; Trenching Services</h2>
+            <p class="underground-intro">
+                Complete subsurface infrastructure solutions including electrical conduit installation, plumbing rough-ins, and utility trenching. Our certified crews handle the hard work below ground so your project stays on schedule above ground. We specialize in underground electrical work, plumbing installation, and site preparation with OSHA-compliant safety protocols.
+            </p>
+            
+            <div class="underground-grid">
+                <div class="underground-item">
+                    <div class="icon">⚡</div>
+                    <h3>Electrical Trenching</h3>
+                    <p>Underground electrical service installation, conduit laying for primary and secondary power distribution, and trenching for commercial and industrial electrical infrastructure up to 480V. Complete with proper bedding and backfilling.</p>
+                </div>
+                
+                <div class="underground-item">
+                    <div class="icon">🚰</div>
+                    <h3>Plumbing Rough-In</h3>
+                    <p>Subsurface plumbing installation including sewer lines, water mains, storm drainage systems, and utility rough-ins for commercial construction projects. Pressure testing and inspection ready.</p>
+                </div>
+                
+                <div class="underground-item">
+                    <div class="icon">📡</div>
+                    <h3>Utility Conduit</h3>
+                    <p>Installation of underground conduit for fiber optic, telecommunications, and low-voltage systems. Proper bedding and backfilling to prevent future settlement issues and cable protection.</p>
+                </div>
+                
+                <div class="underground-item">
+                    <div class="icon">🦺</div>
+                    <h3>Site Preparation</h3>
+                    <p>Complete excavation services, grading, and subsurface preparation for foundations, pads, and underground structures. OSHA-compliant trench safety protocols on every job with certified trenching equipment.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="image-gallery">
+            <h3 class="gallery-title">Electrical, Security &amp; Underground Work Gallery</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558002038-1055907df827?w=600&h=400&fit=crop" alt="Security Camera Installation">
+                    <div class="gallery-caption">
+                        <h4>CCTV Installation</h4>
+                        <p>High-definition IP camera systems with remote monitoring</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop" alt="Commercial Electrical Panel">
+                    <div class="gallery-caption">
+                        <h4>Commercial Electrical</h4>
+                        <p>480V three-phase distribution and industrial infrastructure</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=400&fit=crop" alt="Underground Trenching">
+                    <div class="gallery-caption">
+                        <h4>Underground Trenching</h4>
+                        <p>Professional conduit installation with OSHA safety protocols</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop" alt="Solar Panel Installation">
+                    <div class="gallery-caption">
+                        <h4>Renewable Energy</h4>
+                        <p>Solar farm construction and grid-tie integration</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da775ce01?w=600&h=400&fit=crop" alt="Access Control System">
+                    <div class="gallery-caption">
+                        <h4>Access Control</h4>
+                        <p>Biometric and keycard entry systems for commercial facilities</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1558618047-f4b511d59496?w=600&h=400&fit=crop" alt="Smart Grid Technology">
+                    <div class="gallery-caption">
+                        <h4>Smart Grid Systems</h4>
+                        <p>Advanced metering and automated distribution</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&h=400&fit=crop" alt="Security System Installation">
+                    <div class="gallery-caption">
+                        <h4>Security Integration</h4>
+                        <p>Complete alarm and surveillance system installation</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08678c9a?w=600&h=400&fit=crop" alt="Electrical Infrastructure">
+                    <div class="gallery-caption">
+                        <h4>Electrical Infrastructure</h4>
+                        <p>Industrial electrical systems and power distribution</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&h=400&fit=crop" alt="Fiber Optic Installation">
+                    <div class="gallery-caption">
+                        <h4>Low Voltage Systems</h4>
+                        <p>Fiber optic and telecommunications infrastructure</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="certifications">
+            <h3>Licenses &amp; Certifications</h3>
+            <div class="cert-grid">
+                <div class="cert-item">Master Electrician License</div>
+                <div class="cert-item">TECL Certification</div>
+                <div class="cert-item">OSHA 30 Certified</div>
+                <div class="cert-item">NFPA 70E Compliance</div>
+                <div class="cert-item">LEED Accredited</div>
+                <div class="cert-item">Security License #SEC-2024</div>
+                <div class="cert-item">Bonded &amp; Insured</div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">Return to Main</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TRU EMPIRE ENGINEERING. Dallas, Texas</p>
+    </footer>
+</body>
+</html>
